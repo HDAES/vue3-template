@@ -1,0 +1,58 @@
+import type { Plugin } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import windiCSS from 'vite-plugin-windicss'
+
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+import { configHtmlPlugin } from './html'
+import { configSvgIconsPlugin } from './svgSprite'
+import { configCompressPlugin } from './compress'
+import { configMockPlugin } from './mock'
+
+export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
+  const {
+    VITE_USE_IMAGEMIN,
+    VITE_USE_MOCK,
+    VITE_LEGACY,
+    VITE_BUILD_COMPRESS,
+    VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE
+  } = viteEnv
+
+  const vitePlugins: (Plugin | Plugin[])[] = [vue()]
+
+  // vite-plugin-windicss
+  vitePlugins.push(windiCSS())
+
+  //vite-plugin-svg-icons
+  vitePlugins.push(configSvgIconsPlugin(isBuild))
+
+  // vite-plugin-mock
+  VITE_USE_MOCK && vitePlugins.push(configMockPlugin(isBuild))
+
+  // vite-plugin-html
+  vitePlugins.push(configHtmlPlugin(viteEnv, isBuild))
+
+  vitePlugins.push(
+    AutoImport({
+      resolvers: [ElementPlusResolver()]
+    })
+  )
+
+  vitePlugins.push(
+    Components({
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: 'sass'
+        })
+      ]
+    })
+  )
+
+  if (isBuild) {
+    //vite-plugin-compression
+    vitePlugins.push(configCompressPlugin('brotli', false, false))
+  }
+  return vitePlugins
+}

@@ -1,88 +1,107 @@
 <template>
-  <el-button @click="toggleDark()">点击</el-button>
+  <el-input v-model="input" placeholder="Please input" />
+  <el-table :data="tableData" style="width: 100%; margin-top: 20px">
+    <el-table-column prop="date" label="日期" width="180"> </el-table-column>
+    <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
+    <el-table-column prop="address" label="地址"> </el-table-column>
+  </el-table>
 
-  <button class="btn btn-info btn-sm">info</button>
-  <button class="btn btn-success btn-sm">success</button>
-  <button class="btn btn-warning btn-sm">warning</button>
-  <button class="btn btn-error btn-sm">error</button>
+  <el-radio v-model="radio1" label="1">备选项1</el-radio>
+  <el-radio v-model="radio1" label="2">备选项2</el-radio>
 
-  <div class="py-4 artboard artboard-demo bg-base-200">
-    <ul class="menu p-4 shadow-lg bg-base-100 rounded-box">
-      <li class="menu-title">
-        <span> Menu Title </span>
-      </li>
-      <li>
-        <a>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="inline-block w-5 h-5 mr-2 stroke-current"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-            ></path>
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-            ></path>
-          </svg>
-          Item with icon
-        </a>
-      </li>
-      <li>
-        <a>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="inline-block w-5 h-5 mr-2 stroke-current"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-            ></path>
-          </svg>
-          Item with icon
-        </a>
-      </li>
-      <li>
-        <a>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="inline-block w-5 h-5 mr-2 stroke-current"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-            ></path>
-          </svg>
-          Item with icon
-        </a>
-      </li>
-    </ul>
-  </div>
-  <BeakerIcon class="h-5 w-5 text-blue-500 dark:text-light-200" />
+  <el-card class="box-card" shadow="never">
+    <template #header>
+      <div class="card-header">
+        <span>卡片名称</span>
+        <el-button class="button" type="text">操作按钮</el-button>
+      </div>
+    </template>
+    <div v-for="o in 4" :key="o" class="text item">{{ '列表内容 ' + o }}</div>
+  </el-card>
+
+  <el-pagination
+    v-model:currentPage="currentPage4"
+    :page-sizes="[100, 200, 300, 400]"
+    :page-size="100"
+    layout="total, sizes, prev, pager, next, jumper"
+    :total="400"
+    @size-change="handleSizeChange"
+    @current-change="handleCurrentChange"
+  >
+  </el-pagination>
+
+  <el-select v-model="value" placeholder="Select">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+    >
+    </el-option>
+  </el-select>
+  <DarkModeToggle />
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from 'vue'
-import { BeakerIcon } from '@heroicons/vue/solid'
-import { useDark, useToggle } from '@vueuse/core'
-const isDark = useDark()
+import DarkModeToggle from '@/components/DarkModeToggle/index.vue'
+import { ref } from 'vue'
 
-const toggleDark = useToggle(isDark)
+const input = ref('')
+const currentPage4 = ref(5)
+
+const handleSizeChange = val => {
+  console.log(`${val} items per page`)
+}
+const handleCurrentChange = val => {
+  console.log(`current page: ${val}`)
+}
+
+const radio1 = ref(false)
+const options = [
+  {
+    value: 'Option1',
+    label: 'Option1'
+  },
+  {
+    value: 'Option2',
+    label: 'Option2'
+  },
+  {
+    value: 'Option3',
+    label: 'Option3'
+  },
+  {
+    value: 'Option4',
+    label: 'Option4'
+  },
+  {
+    value: 'Option5',
+    label: 'Option5'
+  }
+]
+const value = ref('')
+const tableData = [
+  {
+    date: '2016-05-02',
+    name: '王小虎',
+    address: '上海市普陀区金沙江路 1518 弄'
+  },
+  {
+    date: '2016-05-04',
+    name: '王小虎',
+    address: '上海市普陀区金沙江路 1517 弄'
+  },
+  {
+    date: '2016-05-01',
+    name: '王小虎',
+    address: '上海市普陀区金沙江路 1519 弄'
+  },
+  {
+    date: '2016-05-03',
+    name: '王小虎',
+    address: '上海市普陀区金沙江路 1516 弄'
+  }
+]
 </script>
 
 <style lang="scss" scoped></style>

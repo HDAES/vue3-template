@@ -1,8 +1,13 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+
 import 'virtual:windi.css'
+import 'virtual:svg-icons-register'
+
 import { setupElementPlus } from '@/config/elemntPlus'
 import { setupRouter } from '@/router'
+import { SvgIcon } from '@/components/Icon/index'
+
+import App from './App.vue'
 
 async function bootstrap() {
   const app = createApp(App)
@@ -10,7 +15,7 @@ async function bootstrap() {
   setupElementPlus(app)
 
   setupRouter(app)
-  app.mount('#app')
+  app.component('SvgIcon', SvgIcon).mount('#app')
 }
 
 bootstrap()

@@ -1,7 +1,31 @@
-// @forward 'element-plus/theme-chalk/src/common/var.scss' with (
-//   $colors: (
-//     'primary': (
-//       'base': green
-//     )
-//   )
-// );
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': #0960bd
+    )
+  )
+);
+
+.dark {
+  --el-color-black: #232429;
+  --el-text-color-primary: #f3f4f6;
+  --el-text-color-regular: #f9f9f9;
+  --el-text-color-secondary: #f9f9f999;
+  --el-color-white: #181818;
+  --el-bg-color: #2e2f34;
+  --el-border-color-light: #2d2d2d;
+  --el-border-color-lighter: #2d2d2d;
+  --el-color-white: #232429;
+  --el-border-base: #2d2d2d;
+  .el-button--primary {
+    color: #eee !important;
+  }
+  .el-input:hover {
+    .el-input__inner {
+      background-color: #37383c;
+    }
+  }
+}
+.el-card {
+  transition: none;
+}
