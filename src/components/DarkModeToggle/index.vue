@@ -13,7 +13,6 @@ const isDark = ref(useDark())
 const cls = ref()
 
 watchEffect(() => {
-  console.log(isDark.value)
   cls.value = {
     left: (isDark.value ? 25 : 3) + 'px'
   }
@@ -24,13 +23,13 @@ const toggleDark = useToggle(isDark)
 
 <style lang="scss" scoped>
 .dark-model {
-  position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 50px;
   height: 26px;
   border-radius: 30px;
+  cursor: pointer;
   border: 1px solid var(--el-text-color-regular);
   .slider {
     position: absolute;

@@ -5,6 +5,7 @@ import windiCSS from 'vite-plugin-windicss'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 import { configHtmlPlugin } from './html'
 import { configSvgIconsPlugin } from './svgSprite'
@@ -53,6 +54,14 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   if (isBuild) {
     //vite-plugin-compression
     vitePlugins.push(configCompressPlugin('brotli', false, false))
+
+    vitePlugins.push(
+      visualizer({
+        open: true,
+        gzipSize: true,
+        brotliSize: true
+      })
+    )
   }
   return vitePlugins
 }
