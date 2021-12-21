@@ -18,8 +18,18 @@
   --el-border-color-lighter: #2d2d2d;
   --el-color-white: #232429;
   --el-border-base: #2d2d2d;
+  --el-color-primary-light-9: #2e2f34;
   .el-button--primary {
     color: #eee !important;
+  }
+  .el-button:hover {
+    color: #eee !important;
+  }
+  .el-button:focus {
+    color: #eee !important;
+  }
+  .el-checkbox__inner {
+    background-color: var(--el-text-color-primary);
   }
   .el-input:hover {
     .el-input__inner {

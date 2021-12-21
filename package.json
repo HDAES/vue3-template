@@ -1,6 +1,6 @@
 {
-  "name": "vite-vue3-ts",
-  "version": "0.0.0",
+  "name": "vite-template",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -9,6 +9,7 @@
     "lint:prettier": "prettier --write ."
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.0.1",
     "@heroicons/vue": "^1.0.5",
     "@vueuse/core": "^7.3.0",
     "axios": "^0.24.0",
