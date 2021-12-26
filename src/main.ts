@@ -8,6 +8,7 @@ import { setupRouter } from '@/router'
 import { SvgIcon } from '@/components/Icon/index'
 
 import App from './App.vue'
+import { setupI18n } from '@/locales/setupI18n'
 
 async function bootstrap() {
   const app = createApp(App)
@@ -15,6 +16,8 @@ async function bootstrap() {
   setupElementPlus(app)
 
   setupRouter(app)
+
+  setupI18n(app)
   app.component('SvgIcon', SvgIcon).mount('#app')
 }
 

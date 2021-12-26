@@ -1,5 +1,5 @@
 <template>
-  <div class="login relative w-full h-full px-4">
+  <div class="login relative w-full h-full px-4 overflow-hidden">
     <DarkModeToggle class="absolute top-3 right-12 enter-x" />
     <LanguageSelect class="absolute top-3 right-3 enter-x" />
     <div class="container relative h-full py-20 mx-auto sm:px-10">
