@@ -16,13 +16,15 @@
             />
 
             <div class="mt-10 font-medium text-white -enter-x">
-              <span class="inline-block mt-4 text-3xl">后台管理系统</span>
+              <span class="inline-block mt-4 text-3xl">{{
+                $t('sys.title')
+              }}</span>
             </div>
 
             <div
               class="mt-5 font-normal text-white text-md dark:text-gray-500 -enter-x"
             >
-              输入您的个人详细信息开始使用！
+              {{ $t('sys.note') }}
             </div>
           </div>
         </div>

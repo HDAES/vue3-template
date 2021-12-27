@@ -22,6 +22,9 @@
   .el-button--primary {
     color: #eee !important;
   }
+  .el-button--text {
+    color: #eee !important;
+  }
   .el-button:hover {
     color: #eee !important;
   }
@@ -49,6 +52,7 @@
     }
   }
 }
-.el-card {
+.el-card,
+.el-button {
   transition: none;
 }

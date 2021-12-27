@@ -6,14 +6,14 @@
   </div>
   <el-form class="enter-x xl:w-90 mt-2">
     <el-form-item>
-      <el-input placeholder="请输入登录账号" />
+      <el-input :placeholder="$t('sys.login.placeholderAccount')" />
     </el-form-item>
     <el-form-item>
-      <el-input placeholder="请输入登录账号" />
+      <el-input :placeholder="$t('sys.login.placeholderPassword')" />
     </el-form-item>
     <el-form-item class="enter-x">
       <div class="flex justify-between">
-        <el-checkbox>记住密码</el-checkbox>
+        <el-checkbox>{{ $t('sys.login.rememberPassword') }}</el-checkbox>
         <el-button type="text" size="medium">{{
           $t('sys.login.forgetFormTitle')
         }}</el-button>

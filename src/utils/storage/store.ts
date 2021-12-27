@@ -6,11 +6,10 @@ export interface GlobalState {
 }
 
 export const useGlobalState = createGlobalState((): GlobalState => {
-  const language = useStorage('vueuse-local-language', '')
-  if (language.value == 'undefined') {
-    language.value = config.language
-  }
-
+  const language: RemovableRef<string> = useStorage(
+    'vueuse-local-language',
+    config.language
+  )
   return {
     language
   }
