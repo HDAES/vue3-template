@@ -7,6 +7,7 @@ interface LangModule {
   momentLocale: Recordable
   momentLocaleName: string
 }
+
 function setI18nLanguage(locale: LocaleType) {
   if (i18n.mode === 'legacy') {
     i18n.global.locale = locale
@@ -17,8 +18,6 @@ function setI18nLanguage(locale: LocaleType) {
 
 export function useLocale() {
   async function changeLocale(locale: LocaleType) {
-    console.log(locale)
-
     const globalI18n = i18n.global
     const currentLocale = unref(globalI18n.locale)
     if (currentLocale === locale) {
@@ -27,7 +26,6 @@ export function useLocale() {
 
     const langModule = ((await import(`./lang/${locale}.ts`)) as any)
       .default as LangModule
-
     if (!langModule) return
 
     const { message, momentLocale, momentLocaleName } = langModule

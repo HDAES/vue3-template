@@ -9,6 +9,7 @@ import { SvgIcon } from '@/components/Icon/index'
 
 import App from './App.vue'
 import { setupI18n } from '@/locales/setupI18n'
+import { useGlobalState } from '@/utils/storage/store'
 
 async function bootstrap() {
   const app = createApp(App)
@@ -18,6 +19,8 @@ async function bootstrap() {
   setupRouter(app)
 
   setupI18n(app)
+
+  useGlobalState()
   app.component('SvgIcon', SvgIcon).mount('#app')
 }
 

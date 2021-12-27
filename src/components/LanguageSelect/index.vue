@@ -17,11 +17,13 @@
 <script lang="ts" setup>
 import { TranslateIcon } from '@heroicons/vue/solid'
 import { useLocale } from '@/locales/useLocale'
-
+import { useGlobalState } from '@/utils/storage/store'
 const { changeLocale } = useLocale()
+const state = useGlobalState()
 
 const handleCommand = async e => {
   await changeLocale(e)
+  state.language.value = e
 }
 </script>
 

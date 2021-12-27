@@ -31,6 +31,12 @@
   .el-checkbox__inner {
     background-color: var(--el-text-color-primary);
   }
+  .el-picker-panel {
+    background-color: var(--el-color-white);
+  }
+  .el-picker-panel__footer {
+    background-color: var(--el-color-white);
+  }
   .el-input:hover {
     .el-input__inner {
       background-color: #37383c;
