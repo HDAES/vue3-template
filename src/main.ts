@@ -21,6 +21,7 @@ async function bootstrap() {
   setupI18n(app)
 
   useGlobalState()
+
   app.component('SvgIcon', SvgIcon).mount('#app')
 }
 

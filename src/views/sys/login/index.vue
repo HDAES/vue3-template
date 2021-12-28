@@ -35,6 +35,8 @@
             class="relative login-form w-full px-5 py-8 mx-auto my-auto rounded-md shadow-md xl:ml-16 xl:bg-transparent sm:px-8 xl:p-4 xl:shadow-none sm:w-3/4 lg:w-2/4 xl:w-auto enter-x"
           >
             <LoginForm />
+            <LoginPhone />
+            <QrCodeForm />
           </div>
         </div>
       </div>
@@ -46,6 +48,8 @@
 import DarkModeToggle from '@/components/DarkModeToggle/index.vue'
 import LanguageSelect from '@/components/LanguageSelect/index.vue'
 import LoginForm from './LoginForm.vue'
+import LoginPhone from './LoginPhone.vue'
+import QrCodeForm from './QrCodeForm.vue'
 </script>
 
 <style lang="scss" scoped>
