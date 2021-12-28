@@ -37,6 +37,7 @@
             <LoginForm />
             <LoginPhone />
             <QrCodeForm />
+            <RegisterForm />
           </div>
         </div>
       </div>
@@ -50,6 +51,7 @@ import LanguageSelect from '@/components/LanguageSelect/index.vue'
 import LoginForm from './LoginForm.vue'
 import LoginPhone from './LoginPhone.vue'
 import QrCodeForm from './QrCodeForm.vue'
+import RegisterForm from './RegisterForm.vue'
 </script>
 
 <style lang="scss" scoped>

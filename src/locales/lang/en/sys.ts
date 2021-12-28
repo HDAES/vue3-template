@@ -3,7 +3,7 @@ export default {
   note: 'Enter your personal details to get started',
   login: {
     backSignIn: 'Back sign in',
-    rememberPassword: 'Remember password',
+    rememberPassword: 'Remember',
     qrSignInFormTitle: 'Qr code sign in',
     signInFormTitle: 'Sign in',
     signUpFormTitle: 'Sign up',

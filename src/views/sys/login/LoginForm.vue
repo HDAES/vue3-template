@@ -37,9 +37,11 @@
           ></el-col
         >
         <el-col :md="8" :xs="24">
-          <el-button class="w-full">{{
-            $t('sys.login.signUpFormTitle')
-          }}</el-button></el-col
+          <el-button
+            class="w-full"
+            @click="setLoginState(LoginStateEnum.REGISTER)"
+            >{{ $t('sys.login.signUpFormTitle') }}</el-button
+          ></el-col
         >
       </el-row>
 
