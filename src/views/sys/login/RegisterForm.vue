@@ -15,6 +15,15 @@
         </div>
       </el-form-item>
       <el-form-item class="enter-x">
+        <StrengthPassword />
+      </el-form-item>
+      <el-form-item class="enter-x">
+        <el-input
+          :placeholder="$t('sys.login.placeholderAgainPassword')"
+          show-password
+        />
+      </el-form-item>
+      <el-form-item class="enter-x">
         <el-button type="primary" size="medium" class="w-full">{{
           $t('sys.login.signUpFormTitle')
         }}</el-button>
@@ -33,6 +42,7 @@ import LoginTitle from './LoginTitle.vue'
 import { computed, unref } from 'vue'
 import { LoginStateEnum, useLoginState } from './useLogin'
 import { CountdownBtn } from '@/components/CountdownBtn'
+import { StrengthPassword } from '@/components/StrengthPassword'
 const { getLoginState, handleBack } = useLoginState()
 
 const getShow = computed(() => unref(getLoginState) === LoginStateEnum.REGISTER)

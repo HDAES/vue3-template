@@ -17,6 +17,7 @@ export default {
     smsCode: '获取验证码',
     sendText: '{0}秒后重新获取',
 
-    scanSign: `扫码后点击"确认"，即可完成登录`
+    scanSign: `扫码后点击"确认"，即可完成登录`,
+    placeholderAgainPassword: '请再输入登录密码'
   }
 }

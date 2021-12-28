@@ -17,6 +17,7 @@ export default {
     smsCode: 'Get SMS code',
     sendText: 'Reacquire in {0}',
 
-    scanSign: `scanning the code to complete the login`
+    scanSign: `scanning the code to complete the login`,
+    placeholderAgainPassword: 'Please enter the login password again'
   }
 }
