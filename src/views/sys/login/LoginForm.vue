@@ -1,12 +1,24 @@
 <template>
   <template class="login-form" v-if="getShow">
     <LoginTitle />
-    <el-form class="enter-x xl:w-90 mt-2">
-      <el-form-item>
-        <el-input :placeholder="$t('sys.login.placeholderAccount')" />
+    <el-form
+      class="enter-x xl:w-90 mt-2"
+      :model="formData"
+      :rules="getFormRules"
+      ref="formRef"
+    >
+      <el-form-item class="enter-x" prop="account">
+        <el-input
+          v-model="formData.account"
+          :placeholder="$t('sys.login.placeholderAccount')"
+        />
       </el-form-item>
-      <el-form-item>
-        <el-input :placeholder="$t('sys.login.placeholderPassword')" />
+      <el-form-item class="enter-x" prop="password">
+        <el-input
+          v-model="formData.password"
+          :placeholder="$t('sys.login.placeholderPassword')"
+          show-password
+        />
       </el-form-item>
       <el-form-item class="enter-x">
         <div class="flex justify-between">
@@ -20,9 +32,13 @@
         </div>
       </el-form-item>
       <el-form-item class="enter-x">
-        <el-button type="primary" size="medium" class="w-full">{{
-          $t('sys.login.signInFormTitle')
-        }}</el-button>
+        <el-button
+          type="primary"
+          size="medium"
+          class="w-full"
+          @click="handleLogin"
+          >{{ $t('sys.login.signInFormTitle') }}</el-button
+        >
       </el-form-item>
       <el-row :gutter="12">
         <el-col :md="8" :xs="24">
@@ -71,11 +87,32 @@ import {
   GoogleCircleFilled,
   TwitterCircleFilled
 } from '@ant-design/icons-vue'
-import { computed, unref } from 'vue'
+import { computed, reactive, ref, unref } from 'vue'
 import LoginTitle from './LoginTitle.vue'
-import { LoginStateEnum, useLoginState } from './useLogin'
+import {
+  LoginStateEnum,
+  useFormRules,
+  useFormValid,
+  useLoginState
+} from './useLogin'
 
 const { getLoginState, setLoginState } = useLoginState()
 
 const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN)
+
+const { getFormRules } = useFormRules()
+
+const formRef = ref()
+
+const { validForm } = useFormValid(formRef)
+
+const formData = reactive({
+  account: null,
+  password: null
+})
+
+async function handleLogin() {
+  const data = await validForm()
+  if (!data) return
+}
 </script>

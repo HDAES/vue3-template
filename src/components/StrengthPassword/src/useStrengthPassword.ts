@@ -1,15 +1,12 @@
-import { ref, computed } from 'vue'
+import { ref, computed, Ref } from 'vue'
 
-const password = ref<Nullable<string>>(null)
-
-export const useStrengthPassword = () => {
+export const useStrengthPassword = (password: Ref<Nullable<string>>) => {
   const getStrengthPassword = computed(() => {
     if (!password.value) {
       return null
     }
 
     const length = password.value?.length
-    console.log(length)
     if (length > 0 && length <= 2) {
       return 0
     }

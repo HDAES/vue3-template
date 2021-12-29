@@ -2,6 +2,7 @@
   <el-input
     v-model="password"
     :placeholder="$t('sys.login.placeholderPassword')"
+    @input="handleInput"
     show-password
   />
   <div class="strength-bar">
@@ -9,12 +10,29 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { onUnmounted } from 'vue'
+<script lang="ts">
+import { onUnmounted, defineComponent, ref } from 'vue'
 import { useStrengthPassword } from './useStrengthPassword'
+export default defineComponent({
+  props: ['value'],
+  setup(props, { emit }) {
+    const inputValue = ref(props.value)
+    const { password, getStrengthPassword, initPassword } =
+      useStrengthPassword(inputValue)
 
-const { password, getStrengthPassword, initPassword } = useStrengthPassword()
-onUnmounted(() => initPassword())
+    onUnmounted(() => initPassword())
+
+    const handleInput = (val: string) => {
+      emit('update:passWordValue', val)
+    }
+    return {
+      password,
+      getStrengthPassword,
+      handleInput,
+      initPassword
+    }
+  }
+})
 </script>
 
 <style lang="scss" scoped>
