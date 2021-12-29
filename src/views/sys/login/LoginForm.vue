@@ -11,9 +11,12 @@
       <el-form-item class="enter-x">
         <div class="flex justify-between">
           <el-checkbox>{{ $t('sys.login.rememberPassword') }}</el-checkbox>
-          <el-button type="text" size="medium">{{
-            $t('sys.login.forgetFormTitle')
-          }}</el-button>
+          <el-button
+            type="text"
+            size="medium"
+            @click="setLoginState(LoginStateEnum.RESET_PASSWORD)"
+            >{{ $t('sys.login.forgetFormTitle') }}</el-button
+          >
         </div>
       </el-form-item>
       <el-form-item class="enter-x">

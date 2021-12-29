@@ -38,6 +38,7 @@
             <LoginPhone />
             <QrCodeForm />
             <RegisterForm />
+            <ForgetPasswordForm />
           </div>
         </div>
       </div>
@@ -52,6 +53,7 @@ import LoginForm from './LoginForm.vue'
 import LoginPhone from './LoginPhone.vue'
 import QrCodeForm from './QrCodeForm.vue'
 import RegisterForm from './RegisterForm.vue'
+import ForgetPasswordForm from './ForgetPasswordForm.vue'
 </script>
 
 <style lang="scss" scoped>

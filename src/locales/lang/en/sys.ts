@@ -18,6 +18,7 @@ export default {
     sendText: 'Reacquire in {0}',
 
     scanSign: `scanning the code to complete the login`,
-    placeholderAgainPassword: 'Please enter the login password again'
+    placeholderAgainPassword: 'Please enter the login password again',
+    reset: 'Reset'
   }
 }
