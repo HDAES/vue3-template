@@ -50,7 +50,7 @@ instance.interceptors.response.use(
           if (response.data.data.list) {
             return response.data.data
           }
-          return response.data
+          return response.data.data
         } else {
           ElMessage.success(response.data.message || '操作成功')
           return response.data

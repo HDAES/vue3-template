@@ -9,8 +9,10 @@ import { SvgIcon } from '@/components/Icon/index'
 
 import App from './App.vue'
 import { setupI18n } from '@/locales/setupI18n'
-import { useGlobalState } from '@/utils/storage/store'
+import { useGlobalState } from '@/utils/storage'
 import { setupStore } from '@/store'
+
+import '@/permission'
 
 async function bootstrap() {
   const app = createApp(App)

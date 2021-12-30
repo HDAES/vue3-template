@@ -95,8 +95,8 @@ import {
   useFormValid,
   useLoginState
 } from './useLogin'
-import { ElMessage } from 'element-plus'
 
+import { useUserStore } from '@/store/modules/user'
 import { postLogin, LoginData } from '@/api/mock/sys'
 
 const { getLoginState, setLoginState } = useLoginState()
@@ -114,12 +114,15 @@ const formData = reactive<LoginData>({
   password: ''
 })
 
+const userStore = useUserStore()
+
 async function handleLogin() {
   const data = await validForm()
   if (!data) return
 
-  postLogin(formData).then(res => {
-    console.log(res)
-  })
+  const userInfo = await userStore.login(formData)
+  if (userInfo) {
+    console.log(userInfo)
+  }
 }
 </script>

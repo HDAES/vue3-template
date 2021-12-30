@@ -6,8 +6,13 @@ export interface LoginData {
   password: string
 }
 
+export interface LoginResponse {
+  token: string
+  realName: string
+}
+
 export function postLogin(data: LoginData) {
-  return request<AxiosResponse>({
+  return request<LoginResponse>({
     url: '/login',
     method: 'post',
     isMock: true,

@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 import { TranslateIcon } from '@heroicons/vue/solid'
 import { useLocale } from '@/locales/useLocale'
-import { useGlobalState } from '@/utils/storage/store'
+import { useGlobalState } from '@/utils/storage'
 const { changeLocale } = useLocale()
 const state = useGlobalState()
 
