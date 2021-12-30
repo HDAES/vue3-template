@@ -65,7 +65,7 @@ export function useFormRules(formData?: Recordable) {
       switch (unref(loginState)) {
         case LoginStateEnum.LOGIN:
           return {
-            account: accountFormRule,
+            username: accountFormRule,
             password: passwordFormRule
           }
         case LoginStateEnum.MOBILE:

@@ -6,6 +6,8 @@
   )
 );
 
+@import 'element-plus/theme-chalk/src/message.scss';
+
 @import '../var//breakpoint.scss';
 .dark {
   --el-color-black: #232429;

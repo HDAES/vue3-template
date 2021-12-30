@@ -7,9 +7,9 @@
       :rules="getFormRules"
       ref="formRef"
     >
-      <el-form-item class="enter-x" prop="account">
+      <el-form-item class="enter-x" prop="username">
         <el-input
-          v-model="formData.account"
+          v-model="formData.username"
           :placeholder="$t('sys.login.placeholderAccount')"
         />
       </el-form-item>
@@ -95,6 +95,9 @@ import {
   useFormValid,
   useLoginState
 } from './useLogin'
+import { ElMessage } from 'element-plus'
+
+import { postLogin, LoginData } from '@/api/mock/sys'
 
 const { getLoginState, setLoginState } = useLoginState()
 
@@ -106,13 +109,17 @@ const formRef = ref()
 
 const { validForm } = useFormValid(formRef)
 
-const formData = reactive({
-  account: null,
-  password: null
+const formData = reactive<LoginData>({
+  username: '',
+  password: ''
 })
 
 async function handleLogin() {
   const data = await validForm()
   if (!data) return
+
+  postLogin(formData).then(res => {
+    console.log(res)
+  })
 }
 </script>
