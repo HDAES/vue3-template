@@ -20,6 +20,8 @@ export default {
     scanSign: `扫码后点击"确认"，即可完成登录`,
     placeholderAgainPassword: '请再输入登录密码',
     reset: '重置',
-    diffPwd: '两次输入密码不一致'
+    diffPwd: '两次输入密码不一致',
+
+    placeholderImageCode: '请输入图像验证码'
   }
 }

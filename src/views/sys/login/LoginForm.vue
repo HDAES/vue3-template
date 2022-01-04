@@ -20,9 +20,17 @@
           show-password
         />
       </el-form-item>
+      <el-form-item class="enter-x" prop="code">
+        <InputCode
+          v-model:code="formData.code"
+          v-model:verify="formData.verify"
+        />
+      </el-form-item>
       <el-form-item class="enter-x">
         <div class="flex justify-between">
-          <el-checkbox>{{ $t('sys.login.rememberPassword') }}</el-checkbox>
+          <el-checkbox v-model="formData.rememberMe">{{
+            $t('sys.login.rememberPassword')
+          }}</el-checkbox>
           <el-button
             type="text"
             size="medium"
@@ -89,6 +97,7 @@ import {
 } from '@ant-design/icons-vue'
 import { computed, reactive, ref, unref } from 'vue'
 import LoginTitle from './LoginTitle.vue'
+import { InputCode } from '@/components/InputCode'
 import {
   LoginStateEnum,
   useFormRules,
@@ -97,8 +106,7 @@ import {
 } from './useLogin'
 
 import { useUserStore } from '@/store/modules/user'
-import { postLogin, LoginData } from '@/api/mock/sys'
-
+import { LoginData } from '@/api/sys/types'
 const { getLoginState, setLoginState } = useLoginState()
 
 const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN)
@@ -111,7 +119,10 @@ const { validForm } = useFormValid(formRef)
 
 const formData = reactive<LoginData>({
   username: '',
-  password: ''
+  password: '',
+  code: '',
+  verify: '',
+  rememberMe: true
 })
 
 const userStore = useUserStore()

@@ -42,7 +42,9 @@ export function useFormRules(formData?: Recordable) {
   const getMobileFormRule = computed(() =>
     createRule(t('sys.login.placeholderMobile'))
   )
-
+  const getImageCodeFormRule = computed(() =>
+    createRule(t('sys.login.placeholderImageCode'))
+  )
   const validateConfirmPassword = (password: string) => {
     return (rule: InternalRuleItem, value: string, callback) => {
       if (!value) {
@@ -61,12 +63,14 @@ export function useFormRules(formData?: Recordable) {
       const mobileFormRule = unref(getMobileFormRule)
       const accountFormRule = unref(getAccountFormRule)
       const passwordFormRule = unref(getPasswordFormRule)
+      const imageCodeFormRule = unref(getImageCodeFormRule)
 
       switch (unref(loginState)) {
         case LoginStateEnum.LOGIN:
           return {
             username: accountFormRule,
-            password: passwordFormRule
+            password: passwordFormRule,
+            code: imageCodeFormRule
           }
         case LoginStateEnum.MOBILE:
           return {

@@ -125,4 +125,5 @@ export default [
       return resultSuccess(undefined, { message: 'Token has been destroyed' })
     }
   }
+  // 获取菜单
 ] as MockMethod[]

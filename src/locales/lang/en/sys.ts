@@ -20,6 +20,8 @@ export default {
     scanSign: `scanning the code to complete the login`,
     placeholderAgainPassword: 'Please enter the login password again',
     reset: 'Reset',
-    diffPwd: 'The two passwords are inconsistent'
+    diffPwd: 'The two passwords are inconsistent',
+
+    placeholderImageCode: 'Image verification code'
   }
 }

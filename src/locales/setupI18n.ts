@@ -1,13 +1,13 @@
 import type { App } from 'vue'
 import type { I18n, I18nOptions } from 'vue-i18n'
-import { useGlobalState } from '@/utils/storage'
+import { globalState } from '@/utils/storage'
 
 import { createI18n } from 'vue-i18n'
 
 export let i18n: ReturnType<typeof createI18n>
 
-const state = useGlobalState()
-const locale = state.language.value
+const { language } = globalState()
+const locale = language
 
 async function createI18nOptions(): Promise<I18nOptions> {
   const defaultLocal = await import(`./lang/${locale}.ts`)
@@ -19,7 +19,7 @@ async function createI18nOptions(): Promise<I18nOptions> {
     fallbackLocale: 'zh-CN',
     formatFallbackMessages: true,
     messages: {
-      [locale]: message
+      [language]: message
     }
   }
 }

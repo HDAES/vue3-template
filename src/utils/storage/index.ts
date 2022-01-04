@@ -6,6 +6,11 @@ export interface GlobalState {
   token: RemovableRef<string>
 }
 
+export interface GlobalValueState {
+  language: string
+  token: string
+}
+
 export const useGlobalState = createGlobalState((): GlobalState => {
   const language: RemovableRef<string> = useStorage(
     'vueuse-local-language',
@@ -18,3 +23,15 @@ export const useGlobalState = createGlobalState((): GlobalState => {
     token
   }
 })
+
+export const globalState = (): GlobalValueState => {
+  let obj = {
+    language: config.language,
+    token: ''
+  }
+  const state = useGlobalState()
+  for (let key in state) {
+    obj[key] = state[key].value
+  }
+  return obj
+}

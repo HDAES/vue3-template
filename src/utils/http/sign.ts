@@ -7,6 +7,7 @@
 import { AxiosRequestConfig } from 'axios'
 //import { getToken } from '../auth'
 import { encryptByMd5 } from '../crypto'
+import { globalState } from '@/utils/storage'
 
 export function setRequestConfig(
   config: AxiosRequestConfig
@@ -23,11 +24,13 @@ export function setRequestConfig(
   config.headers['timestamp'] = timestamp
   config.headers['sign'] = setSign(config, timestamp)
 
+  const { token } = globalState()
+
   // 是否需要设置 token
   const isToken = (config.headers || {}).isToken == false
-  // if(!isToken && getToken()){
-  //     config.headers['Authorization'] =  getToken()
-  // }
+  if (!isToken && token) {
+    config.headers['Authorization'] = token
+  }
 
   // 设置请求头部
   config.baseURL = config.isMock

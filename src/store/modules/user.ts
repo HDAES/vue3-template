@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
-import { UserState } from 'types/store'
+import { rolesState, UserState } from 'types/store'
 
 import { useGlobalState } from '@/utils/storage'
-import { LoginData, postLogin } from '@/api/mock/sys'
+import { postLogin } from '@/api/sys'
+import { LoginData } from '@/api/sys/types'
 
 const state = useGlobalState()
 
@@ -10,7 +11,8 @@ export const useUserStore = defineStore({
   id: 'user',
   state: (): UserState => ({
     token: state.token.value,
-    realName: ''
+    realName: '',
+    roles: []
   }),
   getters: {},
   actions: {
@@ -21,11 +23,15 @@ export const useUserStore = defineStore({
     setRealName(realName: string): void {
       this.realName = realName
     },
+    setRoles(roles: rolesState[]): void {
+      this.roles = roles
+    },
     async login(loginData: LoginData) {
       try {
-        const { token, realName } = await postLogin(loginData)
+        const { token, realName, roles } = await postLogin(loginData)
         this.setToken(token)
         this.setRealName(realName)
+        this.setRoles(roles)
         return true
       } catch (error) {
         return Promise.reject(error)
