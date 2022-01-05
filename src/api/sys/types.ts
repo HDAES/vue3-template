@@ -5,3 +5,9 @@ export interface LoginData {
   rememberMe: boolean
   verify: string
 }
+
+export interface InfoData {
+  roles: string[]
+  nickname: string
+  authorities: Object[]
+}

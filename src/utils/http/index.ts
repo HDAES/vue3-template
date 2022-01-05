@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios'
 import { ElMessage, ElLoading } from 'element-plus'
 import { ResponseList } from 'types/axios'
 import { addPending, removePending } from './pending'
+import { clearToken } from '@/utils/storage'
 import { setRequestConfig } from './sign'
 
 let loadingInstance
@@ -43,6 +44,7 @@ instance.interceptors.response.use(
 
     if (code == 5002 || code == 5003) {
       //身份失效 退出登录
+      clearToken()
       MessageHandle = ElMessage.error(response.data.message || '未知错误')
     } else {
       if (code == 200) {

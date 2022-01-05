@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div style="height: 24px">
     <el-dropdown @command="handleCommand">
       <span class="el-dropdown-link">
-        <TranslateIcon class="h-5 w-5 text-dark-400 dark:text-light-50" />
+        <HeroIcon name="TranslateIcon" />
       </span>
       <template #dropdown>
         <el-dropdown-menu>
@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts" setup>
-import { TranslateIcon } from '@heroicons/vue/solid'
 import { useLocale } from '@/locales/useLocale'
 import { useGlobalState } from '@/utils/storage'
 const { changeLocale } = useLocale()
@@ -26,5 +25,3 @@ const handleCommand = async e => {
   state.language.value = e
 }
 </script>
-
-<style lang="scss" scoped></style>

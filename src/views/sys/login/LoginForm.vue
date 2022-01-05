@@ -22,6 +22,7 @@
       </el-form-item>
       <el-form-item class="enter-x" prop="code">
         <InputCode
+          ref="inputCode"
           v-model:code="formData.code"
           v-model:verify="formData.verify"
         />
@@ -114,6 +115,7 @@ const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN)
 const { getFormRules } = useFormRules()
 
 const formRef = ref()
+const inputCode = ref()
 
 const { validForm } = useFormValid(formRef)
 
@@ -122,7 +124,7 @@ const formData = reactive<LoginData>({
   password: '',
   code: '',
   verify: '',
-  rememberMe: true
+  rememberMe: false
 })
 
 const userStore = useUserStore()
@@ -131,9 +133,13 @@ async function handleLogin() {
   const data = await validForm()
   if (!data) return
 
-  const userInfo = await userStore.login(formData)
-  if (userInfo) {
-    console.log(userInfo)
-  }
+  userStore
+    .login(formData)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(e => {
+      inputCode.value.handleRefresh()
+    })
 }
 </script>

@@ -23,6 +23,7 @@ const toggleDark = useToggle(isDark)
 
 <style lang="scss" scoped>
 .dark-model {
+  position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;

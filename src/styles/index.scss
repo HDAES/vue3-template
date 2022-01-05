@@ -1,1 +1,17 @@
 @import './var/index.scss';
+
+.el-menu {
+  border-right: none !important;
+}
+.sidebar-el-menu:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
+
+.el-menu--collapse .el-submenu__title span {
+  display: none;
+}
+/*隐藏 */
+.el-menu--collapse .el-submenu__title .el-submenu__icon-arrow {
+  display: none;
+}

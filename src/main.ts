@@ -5,17 +5,19 @@ import 'virtual:svg-icons-register'
 
 import { setupElementPlus } from '@/config/elemntPlus'
 import { setupRouter } from '@/router'
-import { SvgIcon } from '@/components/Icon/index'
 
 import App from './App.vue'
 import { setupI18n } from '@/locales/setupI18n'
 import { useGlobalState } from '@/utils/storage'
 import { setupStore } from '@/store'
+import { registerGlobComp } from '@/components/registerGlobComp'
 
 import '@/permission'
 
 async function bootstrap() {
   const app = createApp(App)
+
+  registerGlobComp(app)
 
   setupElementPlus(app)
 
@@ -27,7 +29,7 @@ async function bootstrap() {
 
   setupStore(app)
 
-  app.component('SvgIcon', SvgIcon).mount('#app')
+  app.mount('#app')
 }
 
 bootstrap()

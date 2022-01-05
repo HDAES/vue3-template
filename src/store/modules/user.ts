@@ -1,36 +1,41 @@
 import { defineStore } from 'pinia'
-import { rolesState, UserState } from 'types/store'
-
-import { useGlobalState } from '@/utils/storage'
-import { postLogin } from '@/api/sys'
+import { UserState } from 'types/store'
+import { setToken, getToken } from '@/utils/storage'
+import { encryptByMd5 } from '@/utils/crypto'
+import { postLogin, getInfo } from '@/api/sys'
 import { LoginData } from '@/api/sys/types'
-
-const state = useGlobalState()
 
 export const useUserStore = defineStore({
   id: 'user',
   state: (): UserState => ({
-    token: state.token.value,
+    token: getToken(),
     realName: '',
     roles: []
   }),
   getters: {},
   actions: {
-    setToken(token: string): void {
-      this.token = token
-      state.token.value = token
-    },
     setRealName(realName: string): void {
       this.realName = realName
     },
-    setRoles(roles: rolesState[]): void {
+    setRoles(roles: string[]): void {
       this.roles = roles
     },
     async login(loginData: LoginData) {
       try {
-        const { token, realName, roles } = await postLogin(loginData)
-        this.setToken(token)
-        this.setRealName(realName)
+        const { authorization, authorizationType } = await postLogin({
+          ...loginData,
+          password: encryptByMd5(loginData.password)
+        })
+
+        setToken(authorizationType + ' ' + authorization)
+        return true
+      } catch (error) {
+        return Promise.reject(error)
+      }
+    },
+    async info() {
+      try {
+        const { roles } = await getInfo()
         this.setRoles(roles)
         return true
       } catch (error) {
