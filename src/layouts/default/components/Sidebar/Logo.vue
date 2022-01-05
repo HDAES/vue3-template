@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 48px">logo</div>
+  <div style="height: 64px">logo</div>
 </template>
 
 <script lang="ts" setup></script>

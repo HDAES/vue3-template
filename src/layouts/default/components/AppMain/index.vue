@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar style="background-color: #f0f2f5">
+  <el-scrollbar>
     <Page />
   </el-scrollbar>
 </template>

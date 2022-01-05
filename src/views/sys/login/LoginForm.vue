@@ -105,7 +105,7 @@ import {
   useFormValid,
   useLoginState
 } from './useLogin'
-
+import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store/modules/user'
 import { LoginData } from '@/api/sys/types'
 const { getLoginState, setLoginState } = useLoginState()
@@ -129,6 +129,8 @@ const formData = reactive<LoginData>({
 
 const userStore = useUserStore()
 
+const router = useRouter()
+
 async function handleLogin() {
   const data = await validForm()
   if (!data) return
@@ -136,7 +138,7 @@ async function handleLogin() {
   userStore
     .login(formData)
     .then(res => {
-      console.log(res)
+      router.push('/dashboard/analysis')
     })
     .catch(e => {
       inputCode.value.handleRefresh()
