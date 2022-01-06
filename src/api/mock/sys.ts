@@ -1,6 +1,5 @@
 import request from '@/utils/http'
 import type { AxiosResponse } from 'axios'
-import { rolesState } from 'types/store'
 
 export interface LoginData {
   username: string
@@ -13,7 +12,7 @@ export interface LoginData {
 export interface LoginResponse {
   token: string
   realName: string
-  roles: rolesState[]
+  roles: []
 }
 
 export function postLogin(data: LoginData) {

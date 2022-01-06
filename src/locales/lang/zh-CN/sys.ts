@@ -1,6 +1,7 @@
 export default {
   title: '后台管理系统',
   note: '输入您的个人详细信息开始使用',
+  switchLanguageSuccess: '切换语言成功',
   login: {
     backSignIn: '返回',
     signInFormTitle: '登录',

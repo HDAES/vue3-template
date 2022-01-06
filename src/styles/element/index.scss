@@ -53,12 +53,17 @@
       color: #fff;
     }
   }
+  .el-divider__text {
+    background: var(--el-color-white);
+  }
 }
 .el-card,
 .el-button {
   transition: none;
 }
-
+.el-divider__text {
+  transition: all 0.3s;
+}
 // body {
 //   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 //     'Liberation Mono', 'Courier New', monospace;

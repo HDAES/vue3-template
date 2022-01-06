@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
 import { getPermissionTree } from '@/api/sys/index'
 import Layout from '@/layouts/default/index.vue'
+import { SidebarItem } from 'types/store'
 const modules = import.meta.glob('../../views/**/index.vue')
 
 interface PermissionState {
-  sidebarRouters: any[]
+  sidebarRouters: SidebarItem[]
 }
 
 export const usePermissionStore = defineStore({
@@ -13,7 +14,7 @@ export const usePermissionStore = defineStore({
     sidebarRouters: []
   }),
   actions: {
-    setSidebarRouters(sidebarRouters: any[]) {
+    setSidebarRouters(sidebarRouters: SidebarItem[]) {
       // 顶部导航菜单默认添加统计报表栏指向首页
       this.sidebarRouters = sidebarRouters
     },

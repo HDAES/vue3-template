@@ -7,18 +7,18 @@
 </template>
 
 <script lang="ts" setup>
-import { useDark, useToggle } from '@vueuse/core'
+import { useSetting } from '@/hooks/setting/index'
 import { watchEffect, ref } from 'vue'
-const isDark = ref(useDark())
+
 const cls = ref()
+
+const { isDark, toggleDark } = useSetting()
 
 watchEffect(() => {
   cls.value = {
     left: (isDark.value ? 25 : 3) + 'px'
   }
 })
-
-const toggleDark = useToggle(isDark)
 </script>
 
 <style lang="scss" scoped>

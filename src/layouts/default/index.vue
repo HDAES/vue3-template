@@ -2,7 +2,10 @@
   <el-container style="height: 100%">
     <Sidebar />
     <el-container>
-      <el-header style="height: 64px" class="dark:shadow-2xl">
+      <el-header
+        style="height: 64px; border-bottom: 1px solid #eee"
+        class="dark:shadow-2xl"
+      >
         <Header />
       </el-header>
       <AppMain />

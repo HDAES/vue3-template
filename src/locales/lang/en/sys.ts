@@ -1,6 +1,7 @@
 export default {
   title: 'Backstage management system',
   note: 'Enter your personal details to get started',
+  switchLanguageSuccess: 'Language switch successfully',
   login: {
     backSignIn: 'Back sign in',
     rememberPassword: 'Remember',

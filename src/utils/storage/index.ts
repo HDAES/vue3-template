@@ -11,6 +11,8 @@ export interface GlobalState {
   token: RemovableRef<string>
   rememberMe: RemovableRef<boolean>
   collapse: RemovableRef<boolean>
+  menuBackground: RemovableRef<string>
+  isBreadcrumb: RemovableRef<boolean>
 }
 
 export interface GlobalValueState {
@@ -35,16 +37,30 @@ export const useGlobalState = createGlobalState((): GlobalState => {
     false
   )
 
+  //折叠面板
   const collapse: RemovableRef<boolean> = useStorage(
     'vueuse-local-collapse',
     config.collapse
+  )
+
+  //背景颜色
+  const menuBackground: RemovableRef<string> = useStorage(
+    'vueuse-local-menuBackground',
+    config.menuBackground
+  )
+
+  const isBreadcrumb: RemovableRef<boolean> = useStorage(
+    'vueuse-local-isBreadcrumb',
+    config.isBreadcrumb
   )
 
   return {
     language,
     token,
     rememberMe,
-    collapse
+    collapse,
+    menuBackground,
+    isBreadcrumb
   }
 })
 
