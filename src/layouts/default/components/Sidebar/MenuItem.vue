@@ -4,7 +4,9 @@
     v-if="route?.children && route.children.length > 0"
   >
     <template #title>
-      <HeroIcon name="ViewGridAddIcon" style="color: #f9f9f9" />
+      <i class="pr-4">
+        <HeroIcon name="ViewGridAddIcon" style="color: #f9f9f9" />
+      </i>
       <span>{{ route.meta.title }}</span>
     </template>
     <MenuItem
@@ -35,6 +37,7 @@ interface MenuItemState {
   route: Object
   path: string
   havecChildren: Boolean
+  collapse: Boolean
 }
 export default defineComponent({
   components: { HeroIcon },
