@@ -37,6 +37,67 @@
   }
 }
 
+.card-header {
+  display: flex;
+  min-height: 36px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+// 全局card 样式
+.hades-card {
+  .el-card__header {
+    min-height: 36px;
+    padding: 0 12px;
+    .card-header {
+      .title {
+        font-size: 14px;
+      }
+    }
+  }
+}
+.el-card.is-always-shadow {
+  box-shadow: none;
+}
+.lock-form {
+  .el-form-item__label {
+    padding: 0;
+  }
+}
+
+.el-scrollbar__view {
+  height: 100% !important;
+}
+
+.el-dialog {
+  .el-dialog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee !important;
+    padding-top: 15px;
+    .el-dialog__headerbtn {
+      position: relative;
+      top: 0;
+      right: 0;
+    }
+  }
+  .el-dialog__footer {
+    border-top: 1px solid #eee !important;
+    padding-bottom: 10px;
+  }
+}
+
+.dialog-p-10 {
+  .el-dialog__body {
+    padding: 10px;
+  }
+}
+
+[display='none'] {
+  display: none;
+}
+
 .dark {
   color: var(--el-text-color-regular);
 }
