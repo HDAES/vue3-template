@@ -52,6 +52,15 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       __INTLIFY_PROD_DEVTOOLS__: false,
       __APP_INFO__: JSON.stringify(__APP_INFO__)
     },
-    plugins: createVitePlugins(viteEnv, command === 'build')
+    plugins: createVitePlugins(viteEnv, command === 'build'),
+
+    optimizeDeps: {
+      // @iconify/iconify: The dependency is dynamically and virtually loaded by @purge-icons/generated, so it needs to be specified explicitly
+      include: [
+        'element-plus/lib/locale/lang/zh-cn',
+        'element-plus/lib/locale/lang/en'
+      ],
+      exclude: ['vue-demi', 'consolidate']
+    }
   }
 }
