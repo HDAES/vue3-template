@@ -14,7 +14,7 @@ export const useSettingStore = defineStore({
     isBreadcrumb: state.isBreadcrumb.value
   }),
   getters: {
-    getCollapse(): Boolean {
+    getCollapse(): boolean {
       return this.collapse
     }
   },

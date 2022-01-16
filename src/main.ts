@@ -3,6 +3,8 @@ import '@/styles/index.scss'
 import 'virtual:windi.css'
 import 'virtual:svg-icons-register'
 
+import 'echarts-liquidfill'
+
 import { setupElementPlus } from '@/config/elemntPlus'
 import { setupRouter } from '@/router'
 

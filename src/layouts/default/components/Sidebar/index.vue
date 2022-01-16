@@ -8,6 +8,7 @@
       text-color="#ccc"
       active-text-color="#fff"
       :collapse="settingStore.collapse"
+      :router="true"
     >
       <MenuItem
         v-for="(item, index) in sidebarRouters"
