@@ -1,6 +1,7 @@
 export interface UserState {
   token: string
   realName: string
+  nickName: string
   roles: string[]
 }
 
@@ -13,4 +14,11 @@ export interface SidebarItem {
   path: string
   children: SidebarItem[]
   meta: MetaState
+}
+
+export interface LockInfo {
+  // Password required
+  pwd?: string | undefined
+  // Is it locked?
+  isLock?: boolean
 }

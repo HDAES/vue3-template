@@ -9,6 +9,7 @@
       <Notion />
       <FullScreen />
       <LanguageSelect />
+      <Me />
       <Setting />
     </el-space>
   </div>
@@ -22,4 +23,5 @@ import Search from './Search.vue'
 import Breadcrumb from './Breadcrumb.vue'
 import Collapse from './Collapse.vue'
 import Setting from './Setting.vue'
+import Me from './Me.vue'
 </script>

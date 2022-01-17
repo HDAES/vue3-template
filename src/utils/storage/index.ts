@@ -2,9 +2,12 @@ import {
   createGlobalState,
   RemovableRef,
   useStorage,
-  useSessionStorage
+  useSessionStorage,
+  StorageSerializers
 } from '@vueuse/core'
 import config from '@/config/config'
+
+import { LockInfo } from 'types/store'
 
 export interface GlobalState {
   language: RemovableRef<string>
@@ -13,6 +16,7 @@ export interface GlobalState {
   collapse: RemovableRef<boolean>
   menuBackground: RemovableRef<string>
   isBreadcrumb: RemovableRef<boolean>
+  lockInfo: RemovableRef<Nullable<LockInfo>>
 }
 
 export interface GlobalValueState {
@@ -49,9 +53,17 @@ export const useGlobalState = createGlobalState((): GlobalState => {
     config.menuBackground
   )
 
+  //面包屑
   const isBreadcrumb: RemovableRef<boolean> = useStorage(
     'vueuse-local-isBreadcrumb',
     config.isBreadcrumb
+  )
+
+  const lockInfo: RemovableRef<Nullable<LockInfo>> = useStorage(
+    'vueuse-local-lockInfo',
+    null,
+    undefined,
+    { serializer: StorageSerializers.object }
   )
 
   return {
@@ -60,7 +72,8 @@ export const useGlobalState = createGlobalState((): GlobalState => {
     rememberMe,
     collapse,
     menuBackground,
-    isBreadcrumb
+    isBreadcrumb,
+    lockInfo
   }
 })
 
@@ -103,4 +116,19 @@ export const clearToken = () => {
   const state = useGlobalState()
   state.token.value = ''
   sessionToken.value = ''
+}
+
+export function useLockInfoStorage() {
+  const { lockInfo } = useGlobalState()
+
+  const getLockInfo = () => lockInfo.value
+  const clearLockInfo = () => (lockInfo.value = null)
+  const setLockInfo = (value: LockInfo): void => {
+    lockInfo.value = value
+  }
+  return {
+    getLockInfo,
+    clearLockInfo,
+    setLockInfo
+  }
 }

@@ -10,15 +10,26 @@ export const useUserStore = defineStore({
   state: (): UserState => ({
     token: getToken(),
     realName: '',
+    nickName: '',
     roles: []
   }),
-  getters: {},
+  getters: {
+    getNickName(): string {
+      return this.nickName
+    },
+    getroles(): string[] {
+      return this.roles
+    }
+  },
   actions: {
     setRealName(realName: string): void {
       this.realName = realName
     },
     setRoles(roles: string[]): void {
       this.roles = roles
+    },
+    setNickName(nickname: string): void {
+      this.nickName = nickname
     },
     async login(loginData: LoginData) {
       try {
@@ -35,8 +46,9 @@ export const useUserStore = defineStore({
     },
     async info() {
       try {
-        const { roles } = await getInfo()
+        const { roles, nickname } = await getInfo()
         this.setRoles(roles)
+        this.setNickName(nickname)
         return true
       } catch (error) {
         return Promise.reject(error)
