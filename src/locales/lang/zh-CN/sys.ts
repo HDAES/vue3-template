@@ -24,5 +24,15 @@ export default {
     diffPwd: '两次输入密码不一致',
 
     placeholderImageCode: '请输入图像验证码'
+  },
+
+  lock: {
+    clickUnlock: '点击解锁',
+    inputPlaceholder: '请输入锁屏密码或者用户密码',
+    back: '返回',
+    backSignIn: '返回登录',
+    enterSystem: '进入系统',
+    errorMsg: '锁屏密码不正确',
+    week: '星期'
   }
 }

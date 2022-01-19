@@ -24,5 +24,15 @@ export default {
     diffPwd: 'The two passwords are inconsistent',
 
     placeholderImageCode: 'Image verification code'
+  },
+
+  lock: {
+    clickUnlock: 'Click Unlock',
+    inputPlaceholder: 'lock password or user password',
+    back: 'Back',
+    backSignIn: 'Back to login',
+    enterSystem: 'Enter',
+    errorMsg: 'Incorrect lock screen password',
+    week: 'Week'
   }
 }

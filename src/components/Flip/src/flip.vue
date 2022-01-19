@@ -1,98 +1,105 @@
 <template>
-  <div ref="flipRef" class="flip down">
+  <div class="flip" :class="[flipType, { go: isFlipping }]" :style="textStyle">
     <!-- 位于前面的纸牌 -->
-    <div ref="frontRef" class="digital front" :class="'number' + count"></div>
+    <div class="digital front" :class="_textClass(frontTextFromData)"></div>
     <!-- 位于后面的纸牌 -->
-    <div
-      ref="backRef"
-      class="digital back"
-      :class="'number' + [count < 9 ? count + 1 : '0']"
-    ></div>
+    <div class="digital back" :class="_textClass(backTextFromData)"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, PropType, onMounted } from 'vue'
+import { ref, defineComponent } from 'vue'
 export default defineComponent({
+  name: 'flip',
   props: {
-    defaultNumber: {
-      type: Number as PropType<number>,
+    // 前牌文字
+    frontText: {
+      type: Number,
       default: 0
+    },
+    // 后牌文字
+    backText: {
+      type: Number,
+      default: 1
+    },
+    // 翻牌动画时间，与CSS中设置的animation-duration保持一致
+    duration: {
+      type: Number,
+      default: 600
     }
   },
   setup(props) {
-    const frontRef = ref()
-    const backRef = ref()
-    const flipRef = ref()
-    // 当前数字
-
-    const count = ref<number>(0)
-    // 是否正在翻转（防止翻转未结束就进行下一次翻转）
-    const isFlipping = ref(false)
-
-    const flipDown = () => {
-      if (isFlipping.value) {
-        return false
-      }
-
-      frontRef.value.setAttribute('class', 'digital front number' + count.value)
-
-      // 计算后牌文字（越界判断）
-      let nextCount = count.value >= 9 ? 0 : count.value + 1
-      backRef.value.setAttribute('class', 'digital back number' + nextCount)
-
-      flipRef.value.setAttribute('class', 'flip down go')
-
-      isFlipping.value = true
-      setTimeout(function () {
-        // 去掉go
-        flipRef.value.setAttribute('class', 'flip down')
-        // 将翻转态设置为false
-        isFlipping.value = false
-        // 设置前牌文字为+1后的数字
-        frontRef.value.setAttribute('class', 'digital front number' + nextCount)
-        // 更新当前文字
-        count.value = nextCount
-      }, 1000)
-    }
-
-    const flipUp = () => {
-      if (isFlipping.value) {
-        return false
-      }
-
-      frontRef.value.setAttribute('class', 'digital front number' + count.value)
-
-      // 计算后牌文字（越界判断）
-      let nextCount = count.value <= 0 ? 9 : count.value - 1
-      backRef.value.setAttribute('class', 'digital back number' + nextCount)
-
-      flipRef.value.setAttribute('class', 'flip up go')
-
-      isFlipping.value = true
-      setTimeout(function () {
-        // 去掉go
-        flipRef.value.setAttribute('class', 'flip up')
-        // 将翻转态设置为false
-        isFlipping.value = false
-        // 设置前牌文字为+1后的数字
-        frontRef.value.setAttribute('class', 'digital front number' + nextCount)
-        // 更新当前文字
-        count.value = nextCount
-      }, 1000)
-    }
-
-    onMounted(() => {
-      count.value = props.defaultNumber
+    const isFlipping = ref<boolean>(false)
+    const frontTextFromData = ref<number>(props.frontText)
+    const backTextFromData = ref<number>(props.backText)
+    const flipType = ref<String>('down')
+    const textStyle = ref({
+      width: '60px',
+      height: '100px',
+      lineHeight: '100px',
+      fontSize: '66px'
     })
+
+    const _textStyle = style => {
+      textStyle.value = {
+        ...textStyle.value,
+        ...style
+      }
+    }
+
+    const _textClass = number => {
+      return 'number' + number
+    }
+
+    const _flip = (type, front, back) => {
+      // 如果处于翻转中，则不执行
+      if (isFlipping.value) {
+        return false
+      }
+
+      frontTextFromData.value = front
+      backTextFromData.value = back
+      // 根据传递过来的type设置翻转方向
+      flipType.value = type
+      // 设置翻转状态为true
+      isFlipping.value = true
+      setTimeout(() => {
+        // 设置翻转状态为false
+        isFlipping.value = false
+        frontTextFromData.value = back
+      }, props.duration)
+    }
+
+    // 下翻牌
+    const flipDown = (front, back) => {
+      _flip('down', front, back)
+    }
+    // 上翻牌
+    const flipUp = (front, back) => {
+      _flip('up', front, back)
+    }
+
+    // 设置前牌文字
+    const setFront = text => {
+      frontTextFromData.value = text
+    }
+    // 设置后牌文字
+    const setBack = text => {
+      backTextFromData.value = text
+    }
+
     return {
-      frontRef,
-      backRef,
-      flipRef,
-      count,
-      isFlipping,
+      textStyle,
+      _textStyle,
       flipDown,
-      flipUp
+      flipUp,
+      _textClass,
+      setFront,
+      setBack,
+      flipType,
+      isFlipping,
+      frontTextFromData,
+      backTextFromData
     }
   }
 })
@@ -102,14 +109,9 @@ export default defineComponent({
 .flip {
   display: inline-block;
   position: relative;
-  width: 60px;
-  height: 100px;
-  line-height: 100px;
   border: solid 1px #000;
   border-radius: 10px;
-  background: #fff;
-  font-size: 66px;
-  color: #fff;
+  color: #cccccc;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
   text-align: center;
   font-family: 'Helvetica Neue';
@@ -120,7 +122,7 @@ export default defineComponent({
     position: absolute;
     left: 0;
     right: 0;
-    background: #000;
+    background: #333;
     overflow: hidden;
     box-sizing: border-box;
   }
@@ -129,7 +131,7 @@ export default defineComponent({
     top: 0;
     bottom: 50%;
     border-radius: 10px 10px 0 0;
-    border-bottom: solid 1px #666;
+    border-bottom: solid 1px #111;
   }
 
   .digital:after {
@@ -191,7 +193,7 @@ export default defineComponent({
 .down .back:after {
   z-index: 2;
   transform-origin: 50% 0%;
-  transform: perspective(160px) rotateX(180deg);
+  transform: perspective(500px) rotateX(180deg);
 }
 
 .flip.down .front:after,
@@ -207,7 +209,7 @@ export default defineComponent({
 .flip.up .back:before {
   z-index: 2;
   transform-origin: 50% 100%;
-  transform: perspective(160px) rotateX(-180deg);
+  transform: perspective(500px) rotateX(-180deg);
 }
 
 .flip.up .front:before,
@@ -228,21 +230,21 @@ export default defineComponent({
 
 @keyframes frontFlipDown {
   0% {
-    transform: perspective(160px) rotateX(0deg);
+    transform: perspective(500px) rotateX(0deg);
   }
 
   100% {
-    transform: perspective(160px) rotateX(-180deg);
+    transform: perspective(500px) rotateX(-180deg);
   }
 }
 
 @keyframes backFlipDown {
   0% {
-    transform: perspective(160px) rotateX(180deg);
+    transform: perspective(500px) rotateX(180deg);
   }
 
   100% {
-    transform: perspective(160px) rotateX(0deg);
+    transform: perspective(500px) rotateX(0deg);
   }
 }
 
@@ -258,21 +260,21 @@ export default defineComponent({
 }
 @keyframes frontFlipUp {
   0% {
-    transform: perspective(160px) rotateX(0deg);
+    transform: perspective(500px) rotateX(0deg);
   }
 
   100% {
-    transform: perspective(160px) rotateX(180deg);
+    transform: perspective(500px) rotateX(180deg);
   }
 }
 
 @keyframes backFlipUp {
   0% {
-    transform: perspective(160px) rotateX(-180deg);
+    transform: perspective(500px) rotateX(-180deg);
   }
 
   100% {
-    transform: perspective(160px) rotateX(0deg);
+    transform: perspective(500px) rotateX(0deg);
   }
 }
 </style>

@@ -121,13 +121,12 @@ export const clearToken = () => {
 export function useLockInfoStorage() {
   const { lockInfo } = useGlobalState()
 
-  const getLockInfo = () => lockInfo.value
   const clearLockInfo = () => (lockInfo.value = null)
   const setLockInfo = (value: LockInfo): void => {
     lockInfo.value = value
   }
   return {
-    getLockInfo,
+    getLockInfo: lockInfo.value,
     clearLockInfo,
     setLockInfo
   }

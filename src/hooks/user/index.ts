@@ -1,9 +1,9 @@
 import { computed, ComputedRef } from 'vue'
 import { useUserStore } from '@/store/modules/user'
-
+import { useLockInfoStorage } from '@/utils/storage/index'
 export function userHooks() {
   const userStore = useUserStore()
-
+  const { clearLockInfo } = useLockInfoStorage()
   const nickName: ComputedRef<string> = computed(
     (): string => userStore.getNickName
   )
@@ -11,8 +11,13 @@ export function userHooks() {
   const roles: ComputedRef<string[]> = computed(
     (): string[] => userStore.getroles
   )
+
+  const loginOut = () => userStore.loginOut()
+
   return {
     roles,
-    nickName
+    nickName,
+    loginOut,
+    clearLockInfo
   }
 }

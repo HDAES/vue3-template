@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { UserState } from 'types/store'
-import { setToken, getToken } from '@/utils/storage'
+import { setToken, getToken, clearToken } from '@/utils/storage'
 import { encryptByMd5 } from '@/utils/crypto'
-import { postLogin, getInfo } from '@/api/sys'
+import { postLogin, getInfo, postLoginOut } from '@/api/sys'
 import { LoginData } from '@/api/sys/types'
 
 export const useUserStore = defineStore({
@@ -53,6 +53,19 @@ export const useUserStore = defineStore({
       } catch (error) {
         return Promise.reject(error)
       }
+    },
+    async loginOut() {
+      return new Promise((resolve, reject) => {
+        postLoginOut()
+          .then(res => {
+            clearToken()
+            this.token = ''
+            resolve(true)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   }
 })

@@ -13,6 +13,11 @@ export const useLockStore = defineStore({
   state: (): LockState => ({
     lockInfo: getLockInfo as LockInfo
   }),
+  getters: {
+    getLockInfo(): Nullable<LockInfo> {
+      return this.lockInfo
+    }
+  },
   actions: {
     setLockInfo(info: LockInfo) {
       this.lockInfo = Object.assign({}, this.lockInfo, info)

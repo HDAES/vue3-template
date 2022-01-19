@@ -49,3 +49,10 @@ export function getPermissionTree() {
     method: 'get'
   })
 }
+
+export function postLoginOut() {
+  return request({
+    url: '/admin/sec/user/logout',
+    method: 'POST'
+  })
+}
