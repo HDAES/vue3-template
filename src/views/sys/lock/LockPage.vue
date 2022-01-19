@@ -15,7 +15,7 @@
             src="@/assets/images/avatar.jpg"
             alt="avatar"
           />
-          <div class="name enter-x">admin</div>
+          <div class="name enter-x">{{ nickName }}</div>
           <el-input
             v-model="psw"
             class="enter-x"
@@ -62,10 +62,12 @@ import { useLockStore } from '@/store/modules/lock'
 import { encryptByMd5 } from '@/utils/crypto'
 import { useNow } from './useNow'
 import { ElMessage } from 'element-plus'
-import { t } from '@/hooks/web/useI18n'
+import { useI18n } from '@/hooks/web/useI18n'
 const { year, month, day, hour, minute, week, meridiem } = useNow(true)
-const { loginOut, clearLockInfo } = userHooks()
+const { loginOut, clearLockInfo, nickName } = userHooks()
+const { t } = useI18n()
 const useLock = useLockStore()
+
 const showDate = ref(true)
 const psw = ref('')
 
