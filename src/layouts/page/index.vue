@@ -1,5 +1,5 @@
 <template>
-  <router-view v-slot="{ Component }" style="padding: 16px">
+  <router-view v-slot="{ Component }">
     <transition name="fade-transform" mode="out-in">
       <component :is="Component" />
     </transition>

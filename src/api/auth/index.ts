@@ -8,3 +8,11 @@ export function getUser(params) {
     params
   })
 }
+
+export function getRole(params) {
+  return request({
+    url: '/admin/sec/role/page',
+    method: 'get',
+    params
+  })
+}
