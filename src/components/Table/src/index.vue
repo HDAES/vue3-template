@@ -1,6 +1,6 @@
 <template>
   <div ref="basieTable">
-    <el-table :data="data" style="width: 100%" ref="table" v-loading="loading">
+    <el-table :data="data" ref="table" v-loading="loading">
       <el-table-column
         type="selection"
         width="55"
@@ -19,9 +19,8 @@
 </template>
 
 <script lang="ts" setup name="basieTable">
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useTableRef } from './hooks/useTable'
-import { ColumnProps } from './types/column'
 const emit = defineEmits(['register'])
 const basieTable = ref()
 const table = ref()
