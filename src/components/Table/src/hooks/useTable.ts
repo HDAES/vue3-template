@@ -4,6 +4,8 @@
  * @Date: 2022-01-19 22:57:00
  */
 import { ref, reactive, watchEffect } from 'vue'
+import { StorageSerializers, useStorage } from '@vueuse/core'
+
 import { ColumnProps } from '../types/Column'
 import { Pagination } from '../types/Pagination'
 import { Props } from '../types/Props'
@@ -16,8 +18,9 @@ interface TableActionType {
 
 const data = ref([])
 const loading = ref<boolean>(false)
-const refresh = ref<boolean>(false)
+const refreshState = ref<boolean>(false)
 const title = ref<string>('默认名字')
+const titleEn = ref<string>('en_table')
 const columns = ref<ColumnProps[]>([])
 const customOperate = ref<boolean>(false)
 const pagination = reactive<Pagination>({
@@ -36,6 +39,8 @@ const tableConfig = ref<TableConfig>({
 })
 const edit = ref<(arg0: any) => void>(() => {})
 const add = ref<() => void>(() => {})
+const refresh = ref(() => (refreshState.value = !refreshState.value))
+const resetColumns = ref<(arg0: any) => void>(() => {})
 export function useTableRef() {
   return {
     data,
@@ -45,22 +50,43 @@ export function useTableRef() {
     customOperate,
     pagination,
     tableConfig,
-    refresh: () => (refresh.value = !refresh.value),
+    refresh,
     edit,
-    add
+    add,
+    resetColumns
   }
 }
 
 export function useTable(
   tableProps: Props
 ): [(instance: TableActionType, _init: Function) => void, TableActionType] {
+  const columnsStorage = useStorage(
+    'vueuse-local-' + tableProps.title_en,
+    null,
+    undefined,
+    {
+      serializer: StorageSerializers.object
+    }
+  )
+
   let tempColumns: ColumnProps[] = []
   tableProps.columns.forEach(item => {
     item.show = true
     tempColumns.push(item)
   })
-  columns.value = tempColumns
 
+  if (!columnsStorage.value) {
+    columnsStorage.value = tempColumns
+    columns.value = tempColumns
+  } else {
+    columns.value = columnsStorage.value
+  }
+
+  resetColumns.value = () => {
+    columnsStorage.value = tempColumns
+    columns.value = tempColumns
+  }
+  titleEn.value = tableProps.title_en || 'en_table'
   title.value = tableProps.title || '默认名字'
   pagination.currentPage = tableProps.page || 1
   pagination.pageSize = tableProps.size || 10
@@ -81,9 +107,9 @@ export function useTable(
   // 监听 page,size 的变化 请求接口
   watchEffect(() => {
     loading.value = true
-    refresh.value
+    refreshState.value
     tableProps
-      ?.api({ page: pagination.currentPage, size: pagination.pageSize })
+      ?.apiList({ page: pagination.currentPage, size: pagination.pageSize })
       .then(res => {
         data.value = res.list
         pagination.currentPage = res.page
@@ -95,7 +121,7 @@ export function useTable(
 
   const methods: TableActionType = {
     load: () => {},
-    refresh: () => (refresh.value = !refresh.value)
+    refresh: () => (refreshState.value = !refreshState.value)
   }
 
   return [register, methods]

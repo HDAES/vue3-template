@@ -20,15 +20,17 @@
           </div>
         </template>
       </draggable>
+
+      <el-button :icon="RefreshRight" @click="resetColumns">重置表格</el-button>
     </div>
   </el-popover>
 </template>
 
 <script lang="ts" setup>
 import draggable from 'vuedraggable'
-import { Menu, Rank } from '@element-plus/icons-vue'
+import { Menu, Rank, RefreshRight } from '@element-plus/icons-vue'
 import { useTableRef } from '../hooks/useTable'
-const { tableConfig, columns } = useTableRef()
+const { tableConfig, columns, resetColumns } = useTableRef()
 
 const handleDraggable = e => {
   console.log(e)

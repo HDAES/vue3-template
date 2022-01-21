@@ -7,8 +7,8 @@ import { BasicTable, useTable } from '@/components/Table'
 import { onMounted } from 'vue'
 import { getRole } from '@/api/auth/index'
 const [registerTable, { load }] = useTable({
-  api: getRole,
-
+  title_en: 'role-table',
+  apiList: getRole,
   columns: [
     {
       label: '角色名',

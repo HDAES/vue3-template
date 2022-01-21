@@ -13,7 +13,8 @@ import { getUser } from '@/api/auth/index'
 
 const [registerTable, { load }] = useTable({
   title: '管理员管理',
-  api: getUser,
+  title_en: 'user-table',
+  apiList: getUser,
   size: 10,
   handleEdit: e => {
     console.log(e)
