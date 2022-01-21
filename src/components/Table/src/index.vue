@@ -1,5 +1,5 @@
 <template>
-  <div ref="BasicTable" class="basic-table">
+  <div ref="BasicTable" class="basic-table bg-white dark:bg-dark-800">
     <TableHeader />
 
     <el-card :header="title" shadow="never">
@@ -10,6 +10,7 @@
         v-loading="loading"
         row-key="id"
         v-bind="tableConfig"
+        @selection-change="handleSelectionChange"
       >
         <el-table-column
           v-if="tableConfig.selection"
@@ -29,16 +30,22 @@
           <el-table-column
             :key="index"
             v-if="item.show != false"
-            :label="item.title"
+            :label="item.label"
             :prop="item.dataIndex"
             :align="item.align || 'left'"
             :width="item.width"
+            :formatter="item.formatter"
             :show-overflow-tooltip="item.showOverflowTooltip || false"
           >
             <template v-if="!item.formatter" #default="scope">
               <template v-if="item.slotname">
                 <template v-if="item.slotname == 'operate'">
-                  <el-button v-if="!customOperate" type="text">编辑</el-button>
+                  <el-button
+                    v-if="!customOperate"
+                    type="text"
+                    @click="edit(scope.row)"
+                    >编辑</el-button
+                  >
                   <slot :name="item.slotname" :row="scope.row" />
                   <el-button
                     v-if="!customOperate"
@@ -71,6 +78,7 @@
 import { onMounted, ref } from 'vue'
 import { useTableRef } from './hooks/useTable'
 import TableHeader from './components/TableHeader.vue'
+import { useSelect } from './hooks/useSelect'
 const emit = defineEmits(['register'])
 const BasicTable = ref()
 const table = ref()
@@ -82,11 +90,15 @@ const {
   title,
   tableConfig,
   pagination,
-  customOperate
+  customOperate,
+  edit
 } = useTableRef()
+
+const { handleSelectionChange } = useSelect()
 
 const _init = () => {
   //console.log('12312')
+  console.log(12312)
 }
 
 onMounted(() => {
@@ -96,7 +108,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .basic-table {
-  background-color: #fff;
   padding: 10px;
 }
 </style>

@@ -1,9 +1,13 @@
 <template>
   <div class="table-header">
     <el-space wrap>
-      <el-button :icon="Plus">新增</el-button>
-      <el-button :icon="EditPen">修改</el-button>
-      <el-button :icon="Delete">删除</el-button>
+      <el-button :icon="Plus" @click="add">新增</el-button>
+      <el-button :disabled="selectList.length != 1" :icon="EditPen">
+        修改
+      </el-button>
+      <el-button :disabled="selectList.length == 0" :icon="Delete"
+        >删除</el-button
+      >
       <el-button :icon="Download">导出</el-button>
     </el-space>
     <el-button-group>
@@ -29,7 +33,10 @@ import {
 import { useTableRef } from '../hooks/useTable'
 import TableConfig from './TableConfig.vue'
 import ColumnSetting from './ColumnSetting.vue'
-const { loading, refresh } = useTableRef()
+import { useSelect } from '../hooks/useSelect'
+const { loading, refresh, add } = useTableRef()
+
+const { selectList } = useSelect()
 </script>
 
 <style lang="scss" scoped>

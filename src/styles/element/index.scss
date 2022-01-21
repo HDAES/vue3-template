@@ -56,6 +56,17 @@
   .el-divider__text {
     background: var(--el-color-white);
   }
+  .el-table--striped
+    .el-table__body
+    tr.el-table__row--striped
+    td.el-table__cell {
+    background-color: var(--el-color-primary-light-9);
+  }
+  .el-pagination.is-background .btn-prev,
+  .el-pagination.is-background .btn-next,
+  .el-pagination.is-background .el-pager li {
+    background-color: var(--el-color-white);
+  }
 }
 .el-card,
 .el-button {
@@ -68,3 +79,13 @@
 //   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 //     'Liberation Mono', 'Courier New', monospace;
 // }
+
+.el-pagination {
+  .el-input__suffix {
+    right: 5px;
+  }
+  .btn-prev .icon,
+  .btn-next .icon {
+    display: inline-block;
+  }
+}

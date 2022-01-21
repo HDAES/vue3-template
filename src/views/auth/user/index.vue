@@ -10,34 +10,46 @@
 import { BasicTable, useTable } from '@/components/Table'
 import { onMounted } from 'vue'
 import { getUser } from '@/api/auth/index'
+
 const [registerTable, { load }] = useTable({
   title: '管理员管理',
   api: getUser,
   size: 10,
+  handleEdit: e => {
+    console.log(e)
+  },
+  tableConfig: {
+    selection: true
+  },
   columns: [
     {
-      title: '角色名',
+      label: '角色名',
       dataIndex: 'username'
     },
     {
-      title: '昵称',
+      label: '昵称',
       dataIndex: 'nickname'
     },
     {
-      title: '头像',
+      label: '头像',
       dataIndex: 'avatar'
     },
     {
-      title: '手机',
+      label: '手机',
       dataIndex: 'phone'
     },
     {
-      title: '状态',
+      label: '性别',
+      dataIndex: 'sex',
+      formatter: ({ sex }) => (sex == 1 ? '男' : sex == 2 ? '女' : '未知')
+    },
+    {
+      label: '状态',
       dataIndex: 'status',
       slotname: 'status'
     },
     {
-      title: '操作',
+      label: '操作',
       width: 150,
       dataIndex: 'operate',
       align: 'center',

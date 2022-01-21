@@ -11,20 +11,20 @@ const [registerTable, { load }] = useTable({
 
   columns: [
     {
-      title: '角色名',
+      label: '角色名',
       dataIndex: 'name'
     },
     {
-      title: '描述',
+      label: '描述',
       dataIndex: 'description'
     },
     {
-      title: '创建时间',
+      label: '创建时间',
       dataIndex: 'createTime',
       showOverflowTooltip: true
     },
     {
-      title: '更新时间',
+      label: '更新时间',
       dataIndex: 'updateTime',
       showOverflowTooltip: true
     }

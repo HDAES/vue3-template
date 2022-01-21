@@ -15,7 +15,7 @@
               <Rank />
             </el-icon>
             <el-checkbox v-model="element.show">{{
-              element.title
+              element.label
             }}</el-checkbox>
           </div>
         </template>
