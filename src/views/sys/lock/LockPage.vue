@@ -1,6 +1,6 @@
 <template>
   <div class="lock">
-    <div class="lock-unlock" @click="handleShowForm(false)">
+    <div class="lock-unlock" @click="hanldeOpen">
       <LockOutlined v-show="showDate" />
       <span v-show="showDate">{{ $t('sys.lock.clickUnlock') }}</span>
     </div>
@@ -17,10 +17,10 @@
           />
           <div class="name enter-x">{{ nickName }}</div>
           <el-input
+            ref="inputRef"
             v-model="psw"
             class="enter-x"
             style="width: 250px"
-            @keyup.enter="handleEnter"
             :placeholder="$t('sys.lock.inputPlaceholder')"
             show-password
           />
@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { LockOutlined } from '@ant-design/icons-vue'
 import { FlipClock } from '@/components/Flip/index'
 import { userHooks } from '@/hooks/user/index'
@@ -67,7 +67,7 @@ const { year, month, day, hour, minute, week, meridiem } = useNow(true)
 const { loginOut, clearLockInfo, nickName } = userHooks()
 const { t } = useI18n()
 const useLock = useLockStore()
-
+const inputRef = ref()
 const showDate = ref(true)
 const psw = ref('')
 
@@ -86,6 +86,21 @@ const handleBackLogin = () => {
     clearLockInfo()
   })
 }
+
+const hanldeOpen = () => {
+  showDate.value = false
+  inputRef.value.focus()
+}
+onMounted(() => {
+  document.onkeydown = function (e) {
+    if (e.keyCode == 13) {
+      showDate.value ? hanldeOpen() : handleEnter()
+    }
+  }
+})
+onUnmounted(() => {
+  document.onkeydown = null
+})
 </script>
 
 <style lang="scss" scoped>
