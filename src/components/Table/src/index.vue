@@ -51,6 +51,7 @@
                     v-if="!customOperate"
                     type="text"
                     style="color: #f00"
+                    @click.stop="handleDelete('single', scope.row)"
                     >删除</el-button
                   >
                 </template>
@@ -91,15 +92,13 @@ const {
   tableConfig,
   pagination,
   customOperate,
-  edit
+  edit,
+  handleDelete
 } = useTableRef()
 
 const { handleSelectionChange } = useSelect()
 
-const _init = () => {
-  //console.log('12312')
-  console.log(12312)
-}
+const _init = () => {}
 
 onMounted(() => {
   emit('register', BasicTable.value, _init)

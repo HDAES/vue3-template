@@ -5,7 +5,6 @@ import 'virtual:svg-icons-register'
 
 import 'echarts-liquidfill'
 
-import { setupElementPlus } from '@/config/elemntPlus'
 import { setupRouter } from '@/router'
 
 import App from './App.vue'
@@ -20,8 +19,6 @@ async function bootstrap() {
   const app = createApp(App)
 
   registerGlobComp(app)
-
-  setupElementPlus(app)
 
   setupRouter(app)
 

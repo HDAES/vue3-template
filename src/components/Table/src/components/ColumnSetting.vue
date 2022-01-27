@@ -1,12 +1,16 @@
 <template>
-  <el-popover placement="bottom-start" :width="200" trigger="click">
+  <el-popover placement="bottom-start" :width="250" trigger="click">
     <template #reference>
       <el-button :icon="Menu" />
     </template>
     <div class="column-setting">
       <div style="line-height: 40px">
-        <el-checkbox v-model="tableConfig.index">序号列</el-checkbox>
-        <el-checkbox v-model="tableConfig.selection">勾选项</el-checkbox>
+        <el-checkbox v-model="tableConfig.index">{{
+          $t('table.config.sequenceCol')
+        }}</el-checkbox>
+        <el-checkbox v-model="tableConfig.selection">{{
+          $t('table.config.selectionCol')
+        }}</el-checkbox>
       </div>
       <draggable v-model="columns" item-key="id" @change="handleDraggable">
         <template #item="{ element }">
@@ -21,7 +25,9 @@
         </template>
       </draggable>
 
-      <el-button :icon="RefreshRight" @click="resetColumns">重置表格</el-button>
+      <el-button :icon="RefreshRight" @click="resetColumns">{{
+        $t('table.config.resetTable')
+      }}</el-button>
     </div>
   </el-popover>
 </template>

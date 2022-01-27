@@ -102,3 +102,9 @@
 .dark {
   color: var(--el-text-color-regular);
 }
+
+.el-input__suffix-inner,
+.el-input__suffix {
+  display: flex;
+  align-items: center;
+}

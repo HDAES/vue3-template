@@ -9,6 +9,9 @@ import { getRole } from '@/api/auth/index'
 const [registerTable, { load }] = useTable({
   title_en: 'role-table',
   apiList: getRole,
+  handleAdd: () => {
+    console.log('123123')
+  },
   columns: [
     {
       label: '角色名',

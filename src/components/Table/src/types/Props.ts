@@ -3,7 +3,7 @@ import { TableConfig } from './TableConfig'
 
 export interface ApiDelele {
   // 删除接口方法
-  api?: Function
+  api: Function
 
   // 需要删除ID
   id?: string
@@ -23,7 +23,7 @@ export interface Props {
   apiList: Function
 
   // 删除接口方法
-  ApiDelele?: ApiDelele
+  apiDelele?: ApiDelele
 
   // 列数据
   columns: ColumnProps[]
@@ -41,7 +41,7 @@ export interface Props {
   tableConfig?: TableConfig
 
   //编辑方法
-  handleEdit?: (arg0: any) => void
+  handleEdit?: (arg0?: any) => void
 
   //新增方法
   handleAdd?: () => void

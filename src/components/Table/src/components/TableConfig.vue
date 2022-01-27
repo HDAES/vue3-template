@@ -1,19 +1,19 @@
 <template>
-  <el-popover placement="bottom-start" :width="300" trigger="click">
+  <el-popover placement="bottom-start" :width="400" trigger="click">
     <template #reference>
       <el-button :icon="Setting" />
     </template>
     <div class="flex-col">
       <div class="flex items-center">
-        <span class="label">尺寸：</span>
+        <span class="label">{{ $t('table.config.size') }}：</span>
         <el-radio-group v-model="tableConfig.size">
-          <el-radio label="medium">默认</el-radio>
-          <el-radio label="small">中等</el-radio>
-          <el-radio label="mini">紧凑</el-radio>
+          <el-radio label="medium">{{ $t('table.config.default') }}</el-radio>
+          <el-radio label="small">{{ $t('table.config.medium') }}</el-radio>
+          <el-radio label="mini">{{ $t('table.config.compact') }}</el-radio>
         </el-radio-group>
       </div>
       <div class="flex mt-4">
-        <span class="w-20">斑马线：</span>
+        <span class="w-20">{{ $t('table.config.stripe') }}：</span>
         <el-switch
           v-model="tableConfig.stripe"
           active-color="#13ce66"
@@ -21,7 +21,7 @@
         />
       </div>
       <div class="flex mt-4">
-        <span class="w-20">边框：</span>
+        <span class="w-20">{{ $t('table.config.border') }}：</span>
         <el-switch
           v-model="tableConfig.border"
           active-color="#13ce66"
@@ -29,7 +29,7 @@
         />
       </div>
       <div class="flex mt-4">
-        <span class="w-20">头部：</span>
+        <span class="w-20">{{ $t('table.config.header') }}：</span>
         <el-switch
           v-model="tableConfig.showHeader"
           active-color="#13ce66"
@@ -37,7 +37,7 @@
         />
       </div>
       <div class="flex mt-4">
-        <span class="w-20">序号：</span>
+        <span class="w-20">{{ $t('table.config.sequence') }}：</span>
         <el-switch
           v-model="tableConfig.index"
           active-color="#13ce66"
