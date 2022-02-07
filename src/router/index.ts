@@ -5,11 +5,6 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
-    name: 'index',
-    component: () => import('@/views/index.vue')
-  },
-  {
     path: '/login',
     name: 'login',
     component: () => import('@/views/sys/login/index.vue')

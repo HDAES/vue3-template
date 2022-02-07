@@ -1,84 +1,94 @@
 <template>
-  <BasicTable @register="registerTable">
-    <template #status="scope">
-      <el-switch
-        v-model="scope.row.status"
-        :active-value="1"
-        :inactive-value="0"
-        active-color="#13ce66"
-        inactive-color="#ff4949"
-        @change="switchChange(scope.row)"
-      />
-    </template>
-  </BasicTable>
+  <div>
+    <BasicTable @register="registerTable">
+      <template #status="scope">
+        <el-switch
+          v-model="scope.row.status"
+          :active-value="1"
+          :inactive-value="0"
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+          @change="switchChange(scope.row)"
+        />
+      </template>
 
-  <el-dialog
-    v-model="dialogVisible"
-    :title="modifyType == 'edit' ? '编辑' : '新增'"
-    width="600px"
-  >
-    <el-form
-      label-width="80px"
-      ref="ruleFormRef"
-      :model="formData"
-      :rules="rules"
+      <template #operate="scope">
+        <el-button type="text" @click="handleChangePSW(scope.row)"
+          >改密</el-button
+        >
+      </template>
+    </BasicTable>
+
+    <el-dialog
+      v-model="dialogVisible"
+      :title="modifyType == 'edit' ? '编辑' : '新增'"
+      width="600px"
     >
-      <el-row>
-        <el-col v-if="modifyType == 'edit'" :span="12">
-          <el-form-item label="ID：">
-            <el-input
-              v-model="formData.id"
-              disabled
-              placeholder="请输入用户名"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="用户名：" prop="username">
-            <el-input v-model="formData.username" placeholder="请输入用户名" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="昵称：" prop="nickname">
-            <el-input v-model="formData.nickname" placeholder="请输入昵称" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="角色：" prop="roleIds">
-            <el-select
-              multiple
-              v-model="formData.roleIds"
-              placeholder="请选择角色"
-              style="width: 100%"
-            >
-              <el-option
-                v-for="(item, index) in roleOptions"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
+      <el-form
+        label-width="80px"
+        ref="ruleFormRef"
+        :model="formData"
+        :rules="rules"
+      >
+        <el-row>
+          <el-col v-if="modifyType == 'edit'" :span="12">
+            <el-form-item label="ID：">
+              <el-input
+                v-model="formData.id"
+                disabled
+                placeholder="请输入用户名"
               />
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12" v-if="modifyType == 'add'">
-          <el-form-item label="密码：" prop="password">
-            <el-input
-              v-model="formData.password"
-              placeholder="请输入密码"
-              show-password
-            />
-          </el-form-item>
-        </el-col>
-      </el-row>
-    </el-form>
-
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="handleSubmit">确定</el-button>
-      </span>
-    </template>
-  </el-dialog>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="用户名：" prop="username">
+              <el-input
+                v-model="formData.username"
+                placeholder="请输入用户名"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="昵称：" prop="nickname">
+              <el-input v-model="formData.nickname" placeholder="请输入昵称" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="角色：" prop="roleIds">
+              <el-select
+                multiple
+                v-model="formData.roleIds"
+                placeholder="请选择角色"
+                style="width: 100%"
+              >
+                <el-option
+                  v-for="(item, index) in roleOptions"
+                  :key="index"
+                  :label="item.name"
+                  :value="item.id"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" v-if="modifyType == 'add'">
+            <el-form-item label="密码：" prop="password">
+              <el-input
+                v-model="formData.password"
+                placeholder="请输入密码"
+                show-password
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button type="primary" @click="handleSubmit">确定</el-button>
+        </span>
+      </template>
+    </el-dialog>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -93,6 +103,7 @@ import {
   putUser
 } from '@/api/auth/index'
 import { encryptByMd5 } from '@/utils/crypto'
+import { ElMessageBox } from 'element-plus'
 
 interface Role {
   name: string
@@ -124,7 +135,6 @@ const [registerTable, { load, dialogVisible, modifyType, refresh }] = useTable({
   handleEdit: row => {
     let roleIds: string[] = []
     row.roles.forEach(item => roleIds.push(item.id))
-
     formData.value = {
       id: row.id,
       username: row.username,
@@ -237,4 +247,14 @@ const rules = reactive({
     }
   ]
 })
+
+//修改密码
+const handleChangePSW = row => {
+  ElMessageBox.prompt('请输入密码', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消'
+  }).then(({ value }) => {
+    putUser({ id: row.id, password: encryptByMd5(value) })
+  })
+}
 </script>

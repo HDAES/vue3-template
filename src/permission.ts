@@ -25,6 +25,7 @@ router.beforeEach((to, from, next) => {
               accessRoutes.forEach((route: RouteRecordRaw) => {
                 router.addRoute(route)
               })
+
               next({ ...to, replace: true })
               router.addRoute({
                 path: '/:pathMatch(.*)*',
@@ -38,6 +39,7 @@ router.beforeEach((to, from, next) => {
           NProgress.done()
         }
       } else {
+        console.log(router.getRoutes())
         next()
       }
     }

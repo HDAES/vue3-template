@@ -24,4 +24,7 @@ export interface TableConfig {
 
   //是否显示多选框
   selection?: boolean
+
+  //
+  haveSlot?: boolean
 }

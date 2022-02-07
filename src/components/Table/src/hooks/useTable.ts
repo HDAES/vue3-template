@@ -5,7 +5,7 @@ import { ColumnProps } from '../types/Column'
 import { Pagination } from '../types/Pagination'
 import { Props } from '../types/Props'
 import { TableConfig } from '../types/TableConfig'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessageBox } from 'element-plus'
 import { useSelect } from './useSelect'
 
 export type ModifyType = 'edit' | 'add'
@@ -26,6 +26,7 @@ const title = ref<string>('默认名字')
 const titleEn = ref<string>('en_table')
 const columns = ref<ColumnProps[]>([])
 const customOperate = ref<boolean>(false)
+const haveSlot = ref<boolean>(false)
 const pagination = reactive<Pagination>({
   total: 0,
   currentPage: 1,
@@ -38,7 +39,8 @@ const tableConfig = ref<TableConfig>({
   showHeader: true,
   index: false,
   indexName: '序号',
-  selection: true
+  selection: true,
+  haveSlot: false
 })
 const edit = ref<(arg0: any) => void>(() => {})
 const add = ref<() => void>(() => {})
@@ -61,7 +63,8 @@ export function useTableRef() {
     edit,
     add,
     resetColumns,
-    handleDelete
+    handleDelete,
+    haveSlot
   }
 }
 
@@ -134,18 +137,11 @@ export function useTable(
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
+      }).then(() => {
+        tableProps.apiDelele?.api({ ids: ids.toString() }).then(res => {
+          methods.refresh()
+        })
       })
-        .then(() => {
-          tableProps.apiDelele?.api({ ids: ids.toString() }).then(res => {
-            methods.refresh()
-          })
-        })
-        .catch(() => {
-          ElMessage({
-            type: 'info',
-            message: '已取消'
-          })
-        })
     } else {
       console.log('--暂未实现--')
     }

@@ -22,11 +22,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE
   } = viteEnv
 
-  const vitePlugins: (Plugin | Plugin[])[] = [
-    vue({
-      refTransform: true // 开启ref转换
-    })
-  ]
+  const vitePlugins: (Plugin | Plugin[])[] = [vue()]
 
   // vite-plugin-windicss
   vitePlugins.push(windiCSS())
@@ -41,7 +37,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   vitePlugins.push(configHtmlPlugin(viteEnv, isBuild))
 
   //vite-plugin-vue-setup-extend
-  vitePlugins.push(VueSetupExtend())
+  //vitePlugins.push(VueSetupExtend())
 
   //unplugin-auto-import
   vitePlugins.push(
