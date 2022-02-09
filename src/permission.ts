@@ -39,7 +39,6 @@ router.beforeEach((to, from, next) => {
           NProgress.done()
         }
       } else {
-        console.log(router.getRoutes())
         next()
       }
     }

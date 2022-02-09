@@ -91,7 +91,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="auth-user">
 import { BasicTable, useTable } from '@/components/Table'
 import { reactive, ref } from 'vue'
 import {

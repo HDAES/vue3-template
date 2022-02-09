@@ -4,7 +4,7 @@ import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 
 <template>
   <el-config-provider
-    size="small"
+    size="mini"
     :zIndex="3000"
     :locale="zhCn"
     :button="{ autoInsertSpace: true }"

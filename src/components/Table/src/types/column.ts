@@ -7,7 +7,7 @@ export interface ColumnProps {
   //列标题名字
   label: string
   //数据索引值
-  dataIndex: string
+  dataIndex?: string
   //过滤数据方法
   formatter?: (
     row: any,

@@ -7,6 +7,7 @@ import { Props } from '../types/Props'
 import { TableConfig } from '../types/TableConfig'
 import { ElMessageBox } from 'element-plus'
 import { useSelect } from './useSelect'
+import { ElETable } from 'types/elemntPlus'
 
 export type ModifyType = 'edit' | 'add'
 export type DeleletType = 'single' | 'multiple'
@@ -35,21 +36,23 @@ const pagination = reactive<Pagination>({
 const tableConfig = ref<TableConfig>({
   stripe: true,
   border: false,
-  size: 'small',
+  size: 'default',
   showHeader: true,
   index: false,
   indexName: '序号',
   selection: true,
   haveSlot: false
 })
+const tableRef = ref<ElETable>()
 const edit = ref<(arg0: any) => void>(() => {})
 const add = ref<() => void>(() => {})
 const refresh = ref(() => (refreshState.value = !refreshState.value))
 const resetColumns = ref<(arg0: any) => void>(() => {})
 const handleDelete = ref<(type: DeleletType, arg1: any) => void>(() => {})
+const handleCellClick = ref<(arg0: any) => void>(() => {})
 const dialogVisible = ref<boolean>(false)
 const modifyType = ref<ModifyType>('add')
-
+const handleRowClick = () => {}
 export function useTableRef() {
   return {
     data,
@@ -64,7 +67,10 @@ export function useTableRef() {
     add,
     resetColumns,
     handleDelete,
-    haveSlot
+    handleCellClick,
+    handleRowClick,
+    haveSlot,
+    tableRef
   }
 }
 
@@ -103,7 +109,7 @@ export function useTable(
   pagination.pageSize = tableProps.size || 10
   customOperate.value = tableProps.customOperate || false
   tableConfig.value = { ...tableConfig.value, ...tableProps.tableConfig }
-
+  haveSlot.value = tableProps.tableConfig?.haveSlot || false
   edit.value = row => {
     tableProps.handleEdit ? tableProps.handleEdit(row) : null
     dialogVisible.value = true
@@ -145,6 +151,10 @@ export function useTable(
     } else {
       console.log('--暂未实现--')
     }
+  }
+
+  handleCellClick.value = row => {
+    tableProps.cellClick ? tableProps.cellClick(row) : null
   }
 
   function register(instance: TableActionType, _init: Function) {}

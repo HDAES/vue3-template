@@ -37,7 +37,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   vitePlugins.push(configHtmlPlugin(viteEnv, isBuild))
 
   //vite-plugin-vue-setup-extend
-  //vitePlugins.push(VueSetupExtend())
+  vitePlugins.push(VueSetupExtend())
 
   //unplugin-auto-import
   vitePlugins.push(

@@ -45,4 +45,7 @@ export interface Props {
 
   //新增方法
   handleAdd?: () => void
+
+  //行点击事件
+  cellClick?: (arg0?: any) => void
 }

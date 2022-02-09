@@ -7,9 +7,9 @@
       <div class="flex items-center">
         <span class="label">{{ $t('table.config.size') }}：</span>
         <el-radio-group v-model="tableConfig.size">
-          <el-radio label="medium">{{ $t('table.config.default') }}</el-radio>
-          <el-radio label="small">{{ $t('table.config.medium') }}</el-radio>
-          <el-radio label="mini">{{ $t('table.config.compact') }}</el-radio>
+          <el-radio label="large">{{ $t('table.config.medium') }}</el-radio>
+          <el-radio label="default">{{ $t('table.config.default') }}</el-radio>
+          <el-radio label="small">{{ $t('table.config.compact') }}</el-radio>
         </el-radio-group>
       </div>
       <div class="flex mt-4">

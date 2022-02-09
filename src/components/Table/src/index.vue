@@ -8,11 +8,14 @@
           <el-table
             :key="title"
             :data="data"
-            ref="table"
+            ref="tableRef"
             v-loading="loading"
             row-key="id"
             v-bind="tableConfig"
+            @select="handleSelect"
+            @cell-click="handleCellClick"
             @selection-change="handleSelectionChange"
+            @row-click="handleRowClick"
           >
             <el-table-column
               v-if="tableConfig.selection"
@@ -59,7 +62,7 @@
                     </template>
                     <slot v-else :name="item.slotname" :row="scope.row" />
                   </template>
-                  <span v-else>{{ scope.row[item.dataIndex] }}</span>
+                  <span v-else>{{ scope.row[item.dataIndex || 0] }}</span>
                 </template>
               </el-table-column>
             </template>
@@ -89,7 +92,6 @@ import TableHeader from './components/TableHeader.vue'
 import { useSelect } from './hooks/useSelect'
 const emit = defineEmits(['register'])
 const BasicTable = ref()
-const table = ref()
 
 const {
   data,
@@ -101,10 +103,13 @@ const {
   customOperate,
   edit,
   handleDelete,
-  haveSlot
+  handleCellClick,
+  handleRowClick,
+  haveSlot,
+  tableRef
 } = useTableRef()
 
-const { handleSelectionChange } = useSelect()
+const { handleSelectionChange, handleSelect } = useSelect()
 
 const _init = () => {}
 

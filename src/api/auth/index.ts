@@ -59,3 +59,11 @@ export function putUser(data) {
     data
   })
 }
+
+//获取权限树
+export function getPermissionTree() {
+  return request({
+    url: '/admin/sec/permission/tree',
+    method: 'get'
+  })
+}
