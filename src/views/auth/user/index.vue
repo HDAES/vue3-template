@@ -8,7 +8,7 @@
           :inactive-value="0"
           active-color="#13ce66"
           inactive-color="#ff4949"
-          :before-change="beforeChange(scope.row)"
+          @change="switchChange(scope.row)"
         />
       </template> -->
 

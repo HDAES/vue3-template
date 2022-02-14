@@ -69,7 +69,7 @@
 
 <script lang="ts" setup>
 import { useTable } from '@/components/Table/src/hooks/useTable'
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { encryptByMd5 } from '@/utils/crypto'
 
 import { getAllRoleList, postUserAdd, putUser } from '@/api/auth/index'
@@ -105,7 +105,12 @@ const handleGetRoles = async () => {
   }
 }
 
-handleGetRoles()
+watch(
+  () => upDate.visible,
+  (oldVal, newVal) => {
+    if (!newVal) handleGetRoles()
+  }
+)
 
 const handleSubmit = () => {
   ruleFormRef.value.validate(async valid => {
@@ -155,5 +160,3 @@ const rules = reactive({
   ]
 })
 </script>
-
-<style lang="scss" scoped></style>
