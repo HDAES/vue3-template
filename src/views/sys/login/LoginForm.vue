@@ -20,6 +20,7 @@
           show-password
         />
       </el-form-item>
+
       <el-form-item class="enter-x" prop="code">
         <InputCode
           ref="inputCode"
@@ -27,27 +28,24 @@
           v-model:verify="formData.verify"
         />
       </el-form-item>
+
       <el-form-item class="enter-x">
-        <div class="flex justify-between">
+        <div class="flex flex-1 justify-between">
           <el-checkbox v-model="formData.rememberMe">{{
             $t('sys.login.rememberPassword')
           }}</el-checkbox>
           <el-button
             type="text"
-            size="medium"
             @click="setLoginState(LoginStateEnum.RESET_PASSWORD)"
             >{{ $t('sys.login.forgetFormTitle') }}</el-button
           >
         </div>
       </el-form-item>
+
       <el-form-item class="enter-x">
-        <el-button
-          type="primary"
-          size="medium"
-          class="w-full"
-          @click="handleLogin"
-          >{{ $t('sys.login.signInFormTitle') }}</el-button
-        >
+        <el-button type="primary" class="w-full" @click="handleLogin">{{
+          $t('sys.login.signInFormTitle')
+        }}</el-button>
       </el-form-item>
       <el-row :gutter="12">
         <el-col :md="8" :xs="24">

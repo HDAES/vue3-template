@@ -15,7 +15,6 @@
             @select="handleSelect"
             @cell-click="handleCellClick"
             @selection-change="handleSelectionChange"
-            @row-click="handleRowClick"
           >
             <el-table-column
               v-if="tableConfig.selection"
@@ -38,7 +37,7 @@
                 :label="item.label"
                 :prop="item.dataIndex"
                 :align="item.align || 'left'"
-                :width="item.width"
+                :width="item.slotname == 'operate' ? 'auto' : item.width"
                 :formatter="item.formatter"
                 :show-overflow-tooltip="item.showOverflowTooltip || false"
               >
@@ -48,7 +47,7 @@
                       <el-button
                         v-if="!customOperate"
                         type="text"
-                        @click="edit(scope.row)"
+                        @click="handleUpDate(false, scope.row)"
                         >编辑</el-button
                       >
                       <slot :name="item.slotname" :row="scope.row" />
@@ -87,7 +86,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { useTableRef } from './hooks/useTable'
+import { useTable } from './hooks/useTable'
 import TableHeader from './components/TableHeader.vue'
 import { useSelect } from './hooks/useSelect'
 const emit = defineEmits(['register'])
@@ -101,13 +100,12 @@ const {
   tableConfig,
   pagination,
   customOperate,
-  edit,
   handleDelete,
   handleCellClick,
-  handleRowClick,
   haveSlot,
-  tableRef
-} = useTableRef()
+  tableRef,
+  handleUpDate
+} = useTable()
 
 const { handleSelectionChange, handleSelect } = useSelect()
 

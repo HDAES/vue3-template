@@ -1,22 +1,22 @@
 <template>
   <div>
-    <BasicTable @register="registerTable">
-      <template v-slot:card>
+    <BasicTable>
+      <!-- <template v-slot:card>
         <Tree />
-      </template>
+      </template> -->
     </BasicTable>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { BasicTable, useTable } from '@/components/Table'
+import { BasicTable, registerTable } from '@/components/Table'
 import Tree from './Tree.vue'
 import { useTree } from './useTree'
 import { getRole } from '@/api/auth'
 const { handleCellClick } = useTree()
-const [registerTable] = useTable({
+
+registerTable({
   title: '角色管理',
-  title_en: 'role-table',
   apiList: getRole,
   cellClick: handleCellClick,
   columns: [

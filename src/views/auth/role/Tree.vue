@@ -3,7 +3,9 @@
     <template #header>
       <div class="card-header">
         <span>菜单分配</span>
-        <el-button type="primary" @click="handleSave">保存</el-button>
+        <el-button type="primary" @click="handleSave" :disabled="cellId == ''"
+          >保存</el-button
+        >
       </div>
     </template>
 
@@ -22,7 +24,8 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { useTree } from './useTree'
-const { treeRef, defaultProps, handleSave, optionsTree, getList } = useTree()
+const { treeRef, defaultProps, handleSave, optionsTree, getList, cellId } =
+  useTree()
 
 onMounted(getList)
 </script>

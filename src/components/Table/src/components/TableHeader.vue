@@ -1,7 +1,9 @@
 <template>
   <div class="table-header">
     <el-space wrap>
-      <el-button :icon="Plus" @click="add">{{ $t('table.add') }}</el-button>
+      <el-button :icon="Plus" @click="handleUpDate(true)">{{
+        $t('table.add')
+      }}</el-button>
       <el-button :disabled="selectList.length != 1" :icon="EditPen">
         {{ $t('table.edit') }}
       </el-button>
@@ -13,7 +15,7 @@
         @click="handleDelete('multiple', [])"
         >{{ $t('table.delete') }}</el-button
       >
-      <el-button :icon="Download">{{ $t('table.export') }}</el-button>
+      <el-button :icon="Download" disabled>{{ $t('table.export') }}</el-button>
     </el-space>
     <el-button-group>
       <el-button :icon="Search"></el-button>
@@ -35,12 +37,12 @@ import {
   Delete,
   Download
 } from '@element-plus/icons-vue'
-import { useTableRef } from '../hooks/useTable'
+import { useTable } from '../hooks/useTable'
 import TableConfig from './TableConfig.vue'
 import ColumnSetting from './ColumnSetting.vue'
 import { useSelect } from '../hooks/useSelect'
-const { loading, refresh, add, handleDelete } = useTableRef()
 
+const { handleUpDate, handleDelete, loading, refresh } = useTable()
 const { selectList } = useSelect()
 </script>
 

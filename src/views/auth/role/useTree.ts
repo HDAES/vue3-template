@@ -3,10 +3,10 @@ import { getPermissionTree } from '@/api/auth'
 import { ElETree } from 'types/elemntPlus'
 
 const treeRef = ref<ElETree>()
-
+const cellId = ref('')
 export function useTree() {
   const optionsTree = ref([])
-  const cellId = ref(null)
+
   const defaultProps = {
     children: 'children',
     label: 'name',

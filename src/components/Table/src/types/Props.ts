@@ -16,9 +16,6 @@ export interface Props {
   //表格名称
   title?: string
 
-  // 表格英文名字 用于缓存
-  title_en?: string
-
   // 请求api方法
   apiList: Function
 

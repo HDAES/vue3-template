@@ -50,8 +50,8 @@
 
 <script lang="ts" setup>
 import { Setting } from '@element-plus/icons-vue'
-import { useTableRef } from '../hooks/useTable'
-const { tableConfig } = useTableRef()
+import { useTable } from '../hooks/useTable'
+const { tableConfig } = useTable()
 </script>
 
 <style lang="scss" scoped>

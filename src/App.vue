@@ -4,10 +4,10 @@ import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 
 <template>
   <el-config-provider
-    size="mini"
+    size="default"
     :zIndex="3000"
     :locale="zhCn"
-    :button="{ autoInsertSpace: true }"
+    :button="{ autoInsertSpace: false }"
   >
     <router-view />
   </el-config-provider>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex">
+  <div class="flex flex-1">
     <el-input
       v-model="code"
       maxlength="4"

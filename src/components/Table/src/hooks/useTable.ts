@@ -10,154 +10,125 @@ import { useSelect } from './useSelect'
 import { ElETable } from 'types/elemntPlus'
 
 export type ModifyType = 'edit' | 'add'
-export type DeleletType = 'single' | 'multiple'
-interface TableActionType {
-  load: Function
-  refresh: Function
-  dialogVisible: Ref<boolean>
-  modifyType: Ref<ModifyType>
+
+interface upDateType {
+  visible: boolean
+  type: ModifyType
+  row: any
 }
+
+export type DeleletType = 'single' | 'multiple'
 
 const { selectList } = useSelect()
 
+//表格数据
 const data = ref([])
-const loading = ref<boolean>(false)
+
+//表格Ref
+const tableRef = ref<ElETable>()
+
+//表格加载状态
+const loading = ref<boolean>(true)
+
+//刷新表格数据
 const refreshState = ref<boolean>(false)
+
+//表格名字
 const title = ref<string>('默认名字')
-const titleEn = ref<string>('en_table')
+
+//表格列配置
 const columns = ref<ColumnProps[]>([])
+
+//自定义操作列
 const customOperate = ref<boolean>(false)
+
+//自定义左边栏
 const haveSlot = ref<boolean>(false)
+
+//分页配置
 const pagination = reactive<Pagination>({
-  total: 0,
-  currentPage: 1,
-  pageSize: 10
+  total: 0, //总条数
+  currentPage: 1, //当前页
+  pageSize: 10 //每页条数
 })
+
+//表格默认配置
 const tableConfig = ref<TableConfig>({
   stripe: true,
   border: false,
-  size: 'default',
+  size: 'small',
   showHeader: true,
   index: false,
   indexName: '序号',
   selection: true,
   haveSlot: false
 })
-const tableRef = ref<ElETable>()
-const edit = ref<(arg0: any) => void>(() => {})
-const add = ref<() => void>(() => {})
-const refresh = ref(() => (refreshState.value = !refreshState.value))
-const resetColumns = ref<(arg0: any) => void>(() => {})
+
+const upDate = reactive<upDateType>({
+  visible: false,
+  type: 'add',
+  row: null
+})
+
+//编辑或者新增按钮
+const handleUpDate = (type: boolean, row?: any) => {
+  upDate.visible = true
+  upDate.type = type ? 'add' : 'edit'
+  upDate.row = row
+}
+
 const handleDelete = ref<(type: DeleletType, arg1: any) => void>(() => {})
 const handleCellClick = ref<(arg0: any) => void>(() => {})
-const dialogVisible = ref<boolean>(false)
-const modifyType = ref<ModifyType>('add')
-const handleRowClick = () => {}
-export function useTableRef() {
+
+const resetColumns = ref<() => void>(() => {})
+/**
+ * 刷新表格
+ */
+function refresh(): void {
+  refreshState.value = !refreshState.value
+}
+
+export function useTable() {
   return {
     data,
+    tableRef,
     loading,
-    columns,
     title,
+    columns,
     customOperate,
+    haveSlot,
     pagination,
     tableConfig,
+    upDate,
     refresh,
-    edit,
-    add,
+    handleUpDate,
     resetColumns,
     handleDelete,
-    handleCellClick,
-    handleRowClick,
-    haveSlot,
-    tableRef
+    handleCellClick
   }
 }
 
-export function useTable(
-  tableProps: Props
-): [(instance: TableActionType, _init: Function) => void, TableActionType] {
-  const columnsStorage = useStorage(
-    'vueuse-local-' + tableProps.title_en,
-    null,
-    undefined,
-    {
-      serializer: StorageSerializers.object
-    }
-  )
-
-  let tempColumns: ColumnProps[] = []
-  tableProps.columns.forEach(item => {
-    item.show = true
-    tempColumns.push(item)
-  })
-
-  if (!columnsStorage.value) {
-    columnsStorage.value = tempColumns
-    columns.value = tempColumns
-  } else {
-    columns.value = columnsStorage.value
-  }
-
-  resetColumns.value = () => {
-    columnsStorage.value = tempColumns
-    columns.value = tempColumns
-  }
-  titleEn.value = tableProps.title_en || 'en_table'
+/**
+ * 注册表格
+ * @param tableProps
+ */
+export function registerTable<T>(tableProps: Props): void {
+  //表格名字
   title.value = tableProps.title || '默认名字'
+
+  //分页配置
   pagination.currentPage = tableProps.page || 1
+
   pagination.pageSize = tableProps.size || 10
+
+  //自定义操作列
   customOperate.value = tableProps.customOperate || false
+
+  //表格配置
   tableConfig.value = { ...tableConfig.value, ...tableProps.tableConfig }
+
+  //自定义左边栏
   haveSlot.value = tableProps.tableConfig?.haveSlot || false
-  edit.value = row => {
-    tableProps.handleEdit ? tableProps.handleEdit(row) : null
-    dialogVisible.value = true
-    modifyType.value = 'edit'
-    console.log('编辑点击')
-  }
-
-  add.value = () => {
-    tableProps.handleAdd ? tableProps.handleAdd() : null
-    dialogVisible.value = true
-    modifyType.value = 'add'
-    console.log('新增点击')
-  }
-
-  // 删除
-  handleDelete.value = (type: DeleletType, row: []) => {
-    let title = <any>[]
-    let ids = <any>[]
-    if (tableProps.apiDelele) {
-      if (type == 'single') {
-        title = row[tableProps.apiDelele.name || 'name']
-        ids = [row[tableProps.apiDelele.id || 'id']]
-      } else if (type == 'multiple') {
-        selectList.value.forEach(item => {
-          ids.push(item[tableProps.apiDelele?.id || 'id'])
-          title.push(item[tableProps.apiDelele?.name || 'name'])
-        })
-      }
-
-      ElMessageBox.confirm(`此操作将永久删除 ${title} , 是否继续?`, '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        tableProps.apiDelele?.api({ ids: ids.toString() }).then(res => {
-          methods.refresh()
-        })
-      })
-    } else {
-      console.log('--暂未实现--')
-    }
-  }
-
-  handleCellClick.value = row => {
-    tableProps.cellClick ? tableProps.cellClick(row) : null
-  }
-
-  function register(instance: TableActionType, _init: Function) {}
 
   // 监听 page,size 的变化 请求接口
   watchEffect(() => {
@@ -174,12 +145,75 @@ export function useTable(
       })
   })
 
-  const methods: TableActionType = {
-    load: () => {},
-    refresh: () => (refreshState.value = !refreshState.value),
-    dialogVisible,
-    modifyType
+  useColums(tableProps)
+
+  deleteHooks(tableProps)
+}
+
+/**
+ * 表格列hooks
+ * @param tableProps
+ * @returns
+ */
+export function useColums(tableProps: Props) {
+  const columnsStorage = useStorage(
+    'vueuse-local-' + tableProps.apiList.name,
+    null,
+    undefined,
+    {
+      serializer: StorageSerializers.object
+    }
+  )
+
+  let tempColumns: ColumnProps[] = []
+  tableProps.columns.forEach((item: ColumnProps) => {
+    item.show = true
+    tempColumns.push(item)
+  })
+
+  if (!columnsStorage.value) {
+    columnsStorage.value = tempColumns
+    columns.value = tempColumns
+  } else {
+    columns.value = columnsStorage.value
   }
 
-  return [register, methods]
+  resetColumns.value = () => {
+    columnsStorage.value = tempColumns
+    columns.value = tempColumns
+  }
+}
+
+/**
+ * 重置删除按钮事件
+ * @param tableProps
+ */
+function deleteHooks(tableProps: Props): void {
+  handleDelete.value = (type: DeleletType, row: []) => {
+    let title = <any>[]
+    let ids = <any>[]
+    if (tableProps.apiDelele) {
+      if (type === 'single') {
+        title = row[tableProps.apiDelele.name || 'name']
+        ids = [row[tableProps.apiDelele.id || 'id']]
+      } else if (type === 'multiple') {
+        selectList.value.forEach(item => {
+          ids.push(item[tableProps.apiDelele?.id || 'id'])
+          title.push(item[tableProps.apiDelele?.name || 'name'])
+        })
+      }
+
+      ElMessageBox.confirm(`此操作将永久删除 ${title} , 是否继续?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        tableProps.apiDelele?.api({ ids: ids.toString() }).then(res => {
+          refresh()
+        })
+      })
+    } else {
+      console.log('--暂未实现--')
+    }
+  }
 }

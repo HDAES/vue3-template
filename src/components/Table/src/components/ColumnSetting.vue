@@ -35,8 +35,8 @@
 <script lang="ts" setup>
 import draggable from 'vuedraggable'
 import { Menu, Rank, RefreshRight } from '@element-plus/icons-vue'
-import { useTableRef } from '../hooks/useTable'
-const { tableConfig, columns, resetColumns } = useTableRef()
+import { useTable, useColums } from '../hooks/useTable'
+const { tableConfig, columns, resetColumns } = useTable()
 
 const handleDraggable = e => {
   console.log(e)
