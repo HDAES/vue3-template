@@ -47,7 +47,7 @@
                       <el-button
                         v-if="!customOperate"
                         type="text"
-                        @click="handleUpDate(false, scope.row)"
+                        @click.stop="handleUpDate(false, scope.row)"
                         >编辑</el-button
                       >
                       <slot :name="item.slotname" :row="scope.row" />

@@ -1,3 +1,3 @@
 export { default as BasicTable } from './src/index.vue'
 
-export { registerTable } from './src/hooks/useTable'
+export { registerTable, useTable } from './src/hooks/useTable'

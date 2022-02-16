@@ -67,3 +67,55 @@ export function getPermissionTree() {
     method: 'get'
   })
 }
+
+/**
+ * 添加角色
+ * @param data
+ * @returns
+ */
+export function postAddRole(data) {
+  return request({
+    url: '/admin/sec/role/add',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 修改角色
+ * @param data
+ * @returns
+ */
+export function putRole(data) {
+  return request({
+    url: 'admin/sec/role/edit',
+    method: 'PUT',
+    data
+  })
+}
+
+/**
+ * 删除角色
+ * @param params
+ * @returns
+ */
+export function deleteRole(params) {
+  return request({
+    url: '/admin/sec/role',
+    method: 'DELETE',
+    params
+  })
+}
+
+/**
+ * 修改角色权限
+ * @param data
+ * @returns
+ */
+export function putRolePermission(data) {
+  return request({
+    url: '/admin/sec/role/set/permission',
+    method: 'PUT',
+    data
+  })
+}

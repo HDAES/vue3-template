@@ -14,10 +14,12 @@ export function userHooks() {
 
   const loginOut = () => userStore.loginOut()
 
+  const getInfo = () => userStore.info()
   return {
     roles,
     nickName,
     loginOut,
+    getInfo,
     clearLockInfo
   }
 }

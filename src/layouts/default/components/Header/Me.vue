@@ -98,11 +98,15 @@ const rules = markRaw({
     }
   ]
 })
-const { nickName } = userHooks()
+const { nickName, loginOut } = userHooks()
 const handleCommand = (command: string) => {
   if (command == 'lock') {
     formData.lockPassWord = ''
     visible.value = true
+  } else if (command == 'loginOut') {
+    loginOut().then(res => {
+      location.href = '/login'
+    })
   }
 }
 

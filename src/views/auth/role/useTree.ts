@@ -1,9 +1,15 @@
 import { ref } from 'vue'
-import { getPermissionTree } from '@/api/auth'
+import { getPermissionTree, putRolePermission } from '@/api/auth'
 import { ElETree } from 'types/elemntPlus'
+import { useTable } from '@/components/Table'
+import { userHooks } from '@/hooks/user'
+const { refresh } = useTable()
 
 const treeRef = ref<ElETree>()
 const cellId = ref('')
+
+const { getInfo } = userHooks()
+
 export function useTree() {
   const optionsTree = ref([])
 
@@ -14,7 +20,14 @@ export function useTree() {
   }
 
   function handleSave() {
-    console.log(treeRef.value)
+    putRolePermission({
+      id: cellId.value,
+      permissionIds: treeRef.value?.getCheckedKeys(false)
+    }).then(res => {
+      refresh()
+      //   //刷新用户权限
+      getInfo()
+    })
   }
 
   function getList() {

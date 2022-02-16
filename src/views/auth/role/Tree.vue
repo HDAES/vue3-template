@@ -26,6 +26,5 @@ import { onMounted } from 'vue'
 import { useTree } from './useTree'
 const { treeRef, defaultProps, handleSave, optionsTree, getList, cellId } =
   useTree()
-
 onMounted(getList)
 </script>

@@ -11,7 +11,7 @@ import { ElETable } from 'types/elemntPlus'
 
 export type ModifyType = 'edit' | 'add'
 
-interface upDateType {
+interface DialogConfigType {
   visible: boolean
   type: ModifyType
   row: any
@@ -22,7 +22,7 @@ export type DeleletType = 'single' | 'multiple'
 const { selectList } = useSelect()
 
 //表格数据
-const data = ref([])
+const data = ref<any[]>([])
 
 //表格Ref
 const tableRef = ref<ElETable>()
@@ -64,7 +64,7 @@ const tableConfig = ref<TableConfig>({
   haveSlot: false
 })
 
-const upDate = reactive<upDateType>({
+const dialogConfig = reactive<DialogConfigType>({
   visible: false,
   type: 'add',
   row: null
@@ -72,15 +72,16 @@ const upDate = reactive<upDateType>({
 
 //编辑或者新增按钮
 const handleUpDate = (type: boolean, row?: any) => {
-  upDate.visible = true
-  upDate.type = type ? 'add' : 'edit'
-  upDate.row = row
+  dialogConfig.visible = true
+  dialogConfig.type = type ? 'add' : 'edit'
+  dialogConfig.row = row
 }
 
 const handleDelete = ref<(type: DeleletType, arg1: any) => void>(() => {})
 const handleCellClick = ref<(arg0: any) => void>(() => {})
 
 const resetColumns = ref<() => void>(() => {})
+
 /**
  * 刷新表格
  */
@@ -99,7 +100,7 @@ export function useTable() {
     haveSlot,
     pagination,
     tableConfig,
-    upDate,
+    dialogConfig,
     refresh,
     handleUpDate,
     resetColumns,
@@ -130,6 +131,11 @@ export function registerTable<T>(tableProps: Props): void {
   //自定义左边栏
   haveSlot.value = tableProps.tableConfig?.haveSlot || false
 
+  //列点击事件
+  handleCellClick.value = row => {
+    tableProps.cellClick ? tableProps.cellClick(row) : null
+  }
+
   // 监听 page,size 的变化 请求接口
   watchEffect(() => {
     loading.value = true
@@ -137,10 +143,14 @@ export function registerTable<T>(tableProps: Props): void {
     tableProps
       ?.apiList({ page: pagination.currentPage, size: pagination.pageSize })
       .then(res => {
-        data.value = res.list
-        pagination.currentPage = res.page
-        pagination.pageSize = res.size
-        pagination.total = res.total
+        if (res instanceof Array) {
+          data.value = res
+        } else {
+          data.value = res.list
+          pagination.currentPage = res.page
+          pagination.pageSize = res.size
+          pagination.total = res.total
+        }
         loading.value = false
       })
   })
@@ -148,6 +158,8 @@ export function registerTable<T>(tableProps: Props): void {
   useColums(tableProps)
 
   deleteHooks(tableProps)
+
+  resetDialogConfig()
 }
 
 /**
@@ -216,4 +228,13 @@ function deleteHooks(tableProps: Props): void {
       console.log('--暂未实现--')
     }
   }
+}
+
+/**
+ * 重置弹窗
+ */
+function resetDialogConfig(): void {
+  dialogConfig.visible = false
+  dialogConfig.type = 'add'
+  dialogConfig.row = null
 }

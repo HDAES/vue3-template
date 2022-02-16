@@ -1,24 +1,30 @@
 <template>
   <div>
     <BasicTable>
-      <!-- <template v-slot:card>
-        <Tree />
-      </template> -->
+      <template v-slot:card>
+        <TreeMenus />
+      </template>
     </BasicTable>
+
+    <EditDialog />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { BasicTable, registerTable } from '@/components/Table'
-import Tree from './Tree.vue'
+import EditDialog from './editDialog.vue'
+import TreeMenus from './Tree.vue'
 import { useTree } from './useTree'
-import { getRole } from '@/api/auth'
+import { deleteRole, getRole } from '@/api/auth'
 const { handleCellClick } = useTree()
 
 registerTable({
   title: '角色管理',
   apiList: getRole,
   cellClick: handleCellClick,
+  apiDelele: {
+    api: deleteRole
+  },
   columns: [
     {
       label: '角色名',

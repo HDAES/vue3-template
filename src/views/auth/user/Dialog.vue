@@ -1,7 +1,7 @@
 <template>
   <el-dialog
-    v-model="upDate.visible"
-    :title="upDate.type == 'edit' ? '编辑' : '新增'"
+    v-model="dialogConfig.visible"
+    :title="dialogConfig.type == 'edit' ? '编辑' : '新增'"
     width="600px"
   >
     <el-form
@@ -11,7 +11,7 @@
       :rules="rules"
     >
       <el-row>
-        <el-col v-if="upDate.type == 'edit'" :span="12">
+        <el-col v-if="dialogConfig.type == 'edit'" :span="12">
           <el-form-item label="ID：">
             <el-input
               v-model="formData.id"
@@ -47,7 +47,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="12" v-if="upDate.type == 'add'">
+        <el-col :span="12" v-if="dialogConfig.type == 'add'">
           <el-form-item label="密码：" prop="password">
             <el-input
               v-model="formData.password"
@@ -60,7 +60,7 @@
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="upDate.visible = false">取消</el-button>
+        <el-button @click="dialogConfig.visible = false">取消</el-button>
         <el-button type="primary" @click="handleSubmit">确定</el-button>
       </span>
     </template>
@@ -87,7 +87,7 @@ interface FormData {
   password?: string
 }
 
-const { upDate, refresh } = useTable()
+const { dialogConfig, refresh } = useTable()
 
 const formData = ref<FormData>({
   username: '',
@@ -106,16 +106,32 @@ const handleGetRoles = async () => {
 }
 
 watch(
-  () => upDate.visible,
+  () => dialogConfig.visible,
   (oldVal, newVal) => {
     if (!newVal) handleGetRoles()
+  }
+)
+
+watch(
+  () => dialogConfig.row,
+  () => {
+    if (dialogConfig.type == 'edit') {
+      let roleIds: string[] = []
+      dialogConfig.row.roles.forEach(item => roleIds.push(item.id))
+      formData.value = {
+        id: dialogConfig.row.id,
+        username: dialogConfig.row.username,
+        nickname: dialogConfig.row.nickname,
+        roleIds
+      }
+    }
   }
 )
 
 const handleSubmit = () => {
   ruleFormRef.value.validate(async valid => {
     if (valid) {
-      if (upDate.type == 'add') {
+      if (dialogConfig.type == 'add') {
         await postUserAdd({
           ...formData.value,
           password: encryptByMd5(formData.value.password || '')
@@ -123,7 +139,7 @@ const handleSubmit = () => {
       } else {
         await putUser(formData.value)
       }
-      upDate.visible = false
+      dialogConfig.visible = false
       refresh()
     }
   })
