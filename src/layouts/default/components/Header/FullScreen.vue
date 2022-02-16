@@ -1,9 +1,11 @@
 <template>
-  <HeroIcon name="ArrowsExpandIcon" @click="toggle" />
+  <Icon
+    :name="isFullscreen ? 'FullscreenExitOutlined' : 'FullscreenOutlined'"
+    @click="toggle"
+  />
 </template>
 
 <script lang="ts" setup>
 import { useFullscreen } from '@vueuse/core'
-
-const { toggle } = useFullscreen()
+const { toggle, isFullscreen } = useFullscreen()
 </script>

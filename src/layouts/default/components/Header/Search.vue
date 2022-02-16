@@ -1,5 +1,5 @@
 <template>
-  <HeroIcon name="SearchIcon" @click="dialogVisible = true" />
+  <Icon name="SearchOutlined" @click="dialogVisible = true" />
 
   <el-dialog v-model="dialogVisible" title="搜索" width="30%">
     <input class="w-full bg-gray-300 h-10 rounded-3xl text-center" />

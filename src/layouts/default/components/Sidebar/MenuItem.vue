@@ -5,7 +5,7 @@
   >
     <template #title>
       <i class="pr-4">
-        <HeroIcon name="ViewGridAddIcon" style="color: #f9f9f9" />
+        <Icon name="Dessert" style="color: #f9f9f9" />
       </i>
       <span>{{ route.meta.title }}</span>
     </template>
@@ -30,7 +30,6 @@
 </template>
 
 <script lang="ts">
-import { HeroIcon } from '@/components/Icon'
 import { defineComponent, PropType } from 'vue'
 import { SidebarItem } from 'types/store'
 interface MenuItemState {
@@ -40,7 +39,6 @@ interface MenuItemState {
   collapse: Boolean
 }
 export default defineComponent({
-  components: { HeroIcon },
   name: 'MenuItem',
   props: {
     route: {

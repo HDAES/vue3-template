@@ -7,7 +7,7 @@
       <div class="dark:text-light-50 mb-2 text-xs text-center enter-x">
         {{ $t('sys.login.scanSign') }}
       </div>
-      <el-button size="medium" class="w-full enter-x" @click="handleBack">{{
+      <el-button size="small" class="w-full enter-x" @click="handleBack">{{
         $t('sys.login.backSignIn')
       }}</el-button>
     </div>

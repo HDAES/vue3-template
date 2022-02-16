@@ -1,17 +1,25 @@
 <template>
-  <div class="el-icon">
-    <i :class="className" />
-  </div>
+  <component
+    :is="name"
+    :style="[
+      'font-size:' + size + 'px',
+      'width:' + size + 'px',
+      'height:' + size + 'px'
+    ]"
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'el-icon',
   props: {
-    className: {
+    name: {
       type: String,
       default: 'icon'
+    },
+    size: {
+      type: String || Number,
+      default: '24'
     }
   }
 })

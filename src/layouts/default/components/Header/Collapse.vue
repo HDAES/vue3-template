@@ -1,12 +1,6 @@
 <template>
-  <HeroIcon
-    v-if="settingStore.collapse"
-    name="MenuUnfoldOutlined"
-    @click="settingStore.changeCollapse"
-  />
-  <HeroIcon
-    v-else
-    name="MenuFoldOutlined"
+  <Icon
+    :name="settingStore.collapse ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'"
     @click="settingStore.changeCollapse"
   />
 </template>

@@ -25,16 +25,13 @@
             show-password
           />
           <div class="btn enter-x">
-            <el-button
-              type="text"
-              size="medium"
-              @click="handleShowForm(true)"
-              >{{ $t('sys.lock.back') }}</el-button
-            >
-            <el-button type="text" size="medium" @click="handleBackLogin">{{
+            <el-button type="text" size="small" @click="handleShowForm(true)">{{
+              $t('sys.lock.back')
+            }}</el-button>
+            <el-button type="text" size="small" @click="handleBackLogin">{{
               $t('sys.lock.backSignIn')
             }}</el-button>
-            <el-button type="text" size="medium" @click="handleEnter">{{
+            <el-button type="text" size="small" @click="handleEnter">{{
               $t('sys.lock.enterSystem')
             }}</el-button>
           </div>

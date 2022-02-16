@@ -1,5 +1,5 @@
 <template>
-  <HeroIcon name="CogIcon" @click="drawer = true" />
+  <Icon name="Setting" @click="drawer = true" />
 
   <el-drawer
     v-model="drawer"

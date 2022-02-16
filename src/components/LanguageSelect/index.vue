@@ -2,7 +2,7 @@
   <div style="height: 24px">
     <el-dropdown @command="handleCommand">
       <span class="el-dropdown-link">
-        <HeroIcon name="TranslateIcon" />
+        <Icon name="TranslationOutlined" />
       </span>
       <template #dropdown>
         <el-dropdown-menu>

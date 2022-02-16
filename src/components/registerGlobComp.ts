@@ -1,36 +1,32 @@
 import type { App } from 'vue'
-import { HeroIcon, SvgIcon } from './Icon/index'
+import { SvgIcon, Icon } from './Icon/index'
+
 import {
-  ArrowsExpandIcon,
-  TranslateIcon,
-  ChatIcon,
-  SearchIcon,
-  CogIcon,
-  ViewGridAddIcon
-} from '@heroicons/vue/outline'
-
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
-
-export const comp = [
-  ArrowsExpandIcon,
-  TranslateIcon,
-  ChatIcon,
-  SearchIcon,
-  CogIcon,
   MenuFoldOutlined,
-  MenuUnfoldOutlined
+  MenuUnfoldOutlined,
+  FullscreenExitOutlined,
+  FullscreenOutlined,
+  TranslationOutlined,
+  SearchOutlined
+} from '@ant-design/icons-vue'
+
+import { ChatLineRound, Setting, Dessert } from '@element-plus/icons-vue'
+
+export const elementComps = [ChatLineRound, Setting, Dessert]
+
+export const antComps = [
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  FullscreenExitOutlined,
+  FullscreenOutlined,
+  TranslationOutlined,
+  SearchOutlined
 ]
 
 export function registerGlobComp(app: App) {
-  app.component('ArrowsExpandIcon', ArrowsExpandIcon)
-  app.component('TranslateIcon', TranslateIcon)
-  app.component('ChatIcon', ChatIcon)
-  app.component('CogIcon', CogIcon)
-  app.component('SearchIcon', SearchIcon)
-  app.component('ViewGridAddIcon', ViewGridAddIcon)
+  app.use(SvgIcon).use(Icon)
 
-  app.component('MenuFoldOutlined', MenuFoldOutlined)
-  app.component('MenuUnfoldOutlined', MenuUnfoldOutlined)
+  antComps.map(item => app.component(item.displayName, item))
 
-  app.use(HeroIcon).use(SvgIcon)
+  elementComps.map(item => app.component(item.name, item))
 }

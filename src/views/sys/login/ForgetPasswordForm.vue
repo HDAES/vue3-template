@@ -31,14 +31,14 @@
       <el-form-item class="enter-x">
         <el-button
           type="primary"
-          size="medium"
+          size="small"
           class="w-full"
           @click="handleLogin"
           >{{ $t('sys.login.reset') }}</el-button
         >
       </el-form-item>
       <el-form-item class="enter-x">
-        <el-button size="medium" class="w-full" @click="handleBack">{{
+        <el-button size="small" class="w-full" @click="handleBack">{{
           $t('sys.login.backSignIn')
         }}</el-button>
       </el-form-item>

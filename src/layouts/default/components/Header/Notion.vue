@@ -2,7 +2,7 @@
   <el-popover placement="bottom-start" :width="200" trigger="click">
     <template #reference>
       <div class="message relative w-6 h-6">
-        <HeroIcon name="ChatIcon" />
+        <Icon name="ChatLineRound" />
       </div>
     </template>
     <div>未处理事项</div>
