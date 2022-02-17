@@ -75,7 +75,7 @@ import {
 import { userHooks } from '@/hooks/user/index'
 import { ref, reactive, markRaw } from 'vue'
 import { t } from '@/hooks/web/useI18n'
-import { ElEForm } from 'types/elemntPlus'
+import { FormInstance } from 'types/elemntPlus'
 import { useLockStore } from '@/store/modules/lock'
 import { encryptByMd5 } from '@/utils/crypto'
 type FormData = {
@@ -83,7 +83,7 @@ type FormData = {
 }
 
 const { setLockInfo } = useLockStore()
-const formRef = ref<ElEForm>()
+const formRef = ref<FormInstance>()
 const visible = ref(false)
 const formData = reactive<FormData>({
   lockPassWord: ''

@@ -17,6 +17,7 @@ export interface GlobalState {
   menuBackground: RemovableRef<string>
   isBreadcrumb: RemovableRef<boolean>
   lockInfo: RemovableRef<Nullable<LockInfo>>
+  iconNames: RemovableRef<string[]>
 }
 
 export interface GlobalValueState {
@@ -24,6 +25,7 @@ export interface GlobalValueState {
   token: string
   rememberMe: boolean
   collapse: boolean
+  iconNames: string[]
 }
 
 export const useGlobalState = createGlobalState((): GlobalState => {
@@ -66,6 +68,10 @@ export const useGlobalState = createGlobalState((): GlobalState => {
     { serializer: StorageSerializers.object }
   )
 
+  const iconNames: RemovableRef<string[]> = useStorage(
+    'vueuse-local-iconNames',
+    []
+  )
   return {
     language,
     token,
@@ -73,7 +79,8 @@ export const useGlobalState = createGlobalState((): GlobalState => {
     collapse,
     menuBackground,
     isBreadcrumb,
-    lockInfo
+    lockInfo,
+    iconNames
   }
 })
 
@@ -82,7 +89,8 @@ export const globalState = (): GlobalValueState => {
     language: config.language,
     token: '',
     rememberMe: true,
-    collapse: config.collapse
+    collapse: config.collapse,
+    iconNames: []
   }
   const state = useGlobalState()
   for (let key in state) {

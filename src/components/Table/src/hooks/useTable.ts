@@ -7,7 +7,7 @@ import { Props } from '../types/Props'
 import { TableConfig } from '../types/TableConfig'
 import { ElMessageBox } from 'element-plus'
 import { useSelect } from './useSelect'
-import { ElETable } from 'types/elemntPlus'
+import { TableInstance } from 'types/elemntPlus'
 
 export type ModifyType = 'edit' | 'add'
 
@@ -25,7 +25,7 @@ const { selectList } = useSelect()
 const data = ref<any[]>([])
 
 //表格Ref
-const tableRef = ref<ElETable>()
+const tableRef = ref<TableInstance>()
 
 //表格加载状态
 const loading = ref<boolean>(true)

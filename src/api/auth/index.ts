@@ -119,3 +119,16 @@ export function putRolePermission(data) {
     data
   })
 }
+
+/**
+ * 添加权限
+ * @param data
+ * @returns
+ */
+export function postPermissionAdd(data) {
+  return request({
+    url: '/admin/sec/permission/add',
+    method: 'post',
+    data
+  })
+}

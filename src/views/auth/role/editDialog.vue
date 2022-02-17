@@ -27,7 +27,7 @@
 <script lang="ts" setup>
 import { postAddRole, putRole } from '@/api/auth'
 import { useTable } from '@/components/Table'
-import { ElEForm } from 'types/elemntPlus'
+import { FormInstance } from 'types/elemntPlus'
 import { reactive, ref, watch } from 'vue'
 const { dialogConfig, refresh } = useTable()
 
@@ -37,7 +37,7 @@ type RuleForm = {
   description: string
 }
 
-const formRef = ref<ElEForm>()
+const formRef = ref<FormInstance>()
 const ruleForm = reactive<RuleForm>({
   name: '',
   description: ''

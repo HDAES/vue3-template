@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 import { SvgIcon, Icon } from './Icon/index'
-
+import { useGlobalState } from '@/utils/storage'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -26,7 +26,17 @@ export const antComps = [
 export function registerGlobComp(app: App) {
   app.use(SvgIcon).use(Icon)
 
-  antComps.map(item => app.component(item.displayName, item))
+  let nameList: string[] = []
 
-  elementComps.map(item => app.component(item.name, item))
+  antComps.map(item => {
+    app.component(item.displayName, item)
+    nameList.push(item.displayName)
+  })
+
+  elementComps.map(item => {
+    app.component(item.name, item)
+    nameList.push(item.name)
+  })
+  const { iconNames } = useGlobalState()
+  iconNames.value = nameList
 }
