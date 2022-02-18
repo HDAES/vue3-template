@@ -1,4 +1,4 @@
-import { ref, reactive, watchEffect, Ref } from 'vue'
+import { ref, reactive, watchEffect } from 'vue'
 import { StorageSerializers, useStorage } from '@vueuse/core'
 
 import { ColumnProps } from '../types/Column'
@@ -9,15 +9,11 @@ import { ElMessageBox } from 'element-plus'
 import { useSelect } from './useSelect'
 import { TableInstance } from 'types/elemntPlus'
 
-export type ModifyType = 'edit' | 'add'
-
 interface DialogConfigType {
   visible: boolean
-  type: ModifyType
+  type: 'edit' | 'add'
   row: any
 }
-
-export type DeleletType = 'single' | 'multiple'
 
 const { selectList } = useSelect()
 
@@ -77,7 +73,9 @@ const handleUpDate = (type: boolean, row?: any) => {
   dialogConfig.row = row
 }
 
-const handleDelete = ref<(type: DeleletType, arg1: any) => void>(() => {})
+const handleDelete = ref<(type: 'single' | 'multiple', arg1: any) => void>(
+  () => {}
+)
 const handleCellClick = ref<(arg0: any) => void>(() => {})
 
 const resetColumns = ref<() => void>(() => {})
@@ -201,7 +199,7 @@ export function useColums(tableProps: Props) {
  * @param tableProps
  */
 function deleteHooks(tableProps: Props): void {
-  handleDelete.value = (type: DeleletType, row: []) => {
+  handleDelete.value = (type: 'single' | 'multiple', row: []) => {
     let title = <any>[]
     let ids = <any>[]
     if (tableProps.apiDelele) {

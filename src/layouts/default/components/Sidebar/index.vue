@@ -1,6 +1,7 @@
 <template>
   <el-scrollbar :style="'background-color:' + settingStore.menuBackground">
     <Logo />
+
     <el-menu
       default-active="2"
       class="sidebar-el-menu"
@@ -8,7 +9,8 @@
       text-color="#ccc"
       active-text-color="#fff"
       :collapse="settingStore.collapse"
-      :router="true"
+      :collapse-transition="true"
+      router
     >
       <MenuItem
         v-for="(item, index) in sidebarRouters"

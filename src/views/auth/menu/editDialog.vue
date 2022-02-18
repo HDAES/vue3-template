@@ -3,7 +3,7 @@
     v-model="dialogConfig.visible"
     :title="dialogConfig.type == 'edit' ? '编辑' : '新增'"
     width="600px"
-    @close="close(formRef)"
+    @close="close"
   >
     <el-form ref="formRef" :model="formData" :rules="rules" label-width="100px">
       <el-row>
@@ -112,9 +112,9 @@
 import { useTable } from '@/components/Table'
 import { SelectIcon } from '@/components/SelectIcon'
 import { SelectTree } from '@/components/SelectTree'
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { FormInstance } from 'types/elemntPlus'
-import { postPermissionAdd } from '@/api/auth'
+import { postPermissionAdd, putPermission } from '@/api/auth'
 const { dialogConfig, refresh, data } = useTable()
 
 type FormData = {
@@ -132,7 +132,7 @@ type FormData = {
 
 const formRef = ref<FormInstance>()
 
-const formData = reactive<FormData>({
+const formData = ref<FormData>({
   type: 0,
   name: '',
   icon: '',
@@ -143,22 +143,57 @@ const formData = reactive<FormData>({
   method: ''
 })
 
+watch(
+  () => dialogConfig.row,
+  () => {
+    const row = dialogConfig.row
+    if (row) {
+      formData.value = {
+        name: row.name,
+        path: row.path,
+        method: row.method,
+        component: row.component,
+        type: row.type,
+        permission: row.permission,
+        icon: row.icon,
+        sort: row.sort,
+        parentId: row.parentId,
+        id: row.id
+      }
+    }
+  }
+)
+
 const handleDetermine = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.validate(async valid => {
     if (valid) {
       if (dialogConfig.type == 'add') {
-        await postPermissionAdd(formData)
+        formData.value.parentId = '0'
+        formData.value.component = 'Layout'
+        await postPermissionAdd(formData.value)
+      } else {
+        await putPermission(formData.value)
       }
+      dialogConfig.visible = false
+      refresh()
     } else {
       return false
     }
   })
 }
 
-const close = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.resetFields()
+const close = () => {
+  formData.value = {
+    type: 0,
+    name: '',
+    icon: '',
+    permission: '',
+    sort: 0,
+    path: '',
+    parentId: '',
+    method: ''
+  }
 }
 
 const rules = {

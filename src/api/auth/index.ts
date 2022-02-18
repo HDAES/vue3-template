@@ -132,3 +132,29 @@ export function postPermissionAdd(data) {
     data
   })
 }
+
+/**
+ * 删除菜单
+ * @param params
+ * @returns
+ */
+export function deletePermission(params) {
+  return request({
+    url: '/admin/sec/permission/del',
+    method: 'DELETE',
+    params
+  })
+}
+
+/**
+ * 修改菜单
+ * @param data
+ * @returns
+ */
+export function putPermission(data) {
+  return request({
+    url: '/admin/sec/permission/edit',
+    method: 'PUT',
+    data
+  })
+}

@@ -1,9 +1,9 @@
 <template>
   <div class="flip" :class="[flipType, { go: isFlipping }]" :style="textStyle">
     <!-- 位于前面的纸牌 -->
-    <div class="digital front" :class="_textClass(frontTextFromData)"></div>
+    <div class="digital front" :class="textClass(frontTextFromData)"></div>
     <!-- 位于后面的纸牌 -->
-    <div class="digital back" :class="_textClass(backTextFromData)"></div>
+    <div class="digital back" :class="textClass(backTextFromData)"></div>
   </div>
 </template>
 
@@ -47,7 +47,7 @@ export default defineComponent({
       }
     }
 
-    const _textClass = number => {
+    const textClass = number => {
       return 'number' + number
     }
 
@@ -90,10 +90,9 @@ export default defineComponent({
 
     return {
       textStyle,
-      _textStyle,
       flipDown,
       flipUp,
-      _textClass,
+      textClass,
       setFront,
       setBack,
       flipType,

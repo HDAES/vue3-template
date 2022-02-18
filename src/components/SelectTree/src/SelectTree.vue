@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps, onMounted, defineEmits } from 'vue'
+import { ref, onMounted } from 'vue'
 const emit = defineEmits(['update:parentId'])
 const props = defineProps({
   parentId: {

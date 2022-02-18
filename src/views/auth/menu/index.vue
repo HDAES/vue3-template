@@ -8,14 +8,14 @@
 
 <script lang="ts" setup name="auth-user">
 import { BasicTable, registerTable } from '@/components/Table'
-import { getPermissionTree, deleteUser } from '@/api/auth/index'
+import { getPermissionTree, deletePermission } from '@/api/auth/index'
 import EditDialog from './editDialog.vue'
 
 registerTable({
   title: '管理员管理',
   apiList: getPermissionTree,
   apiDelele: {
-    api: deleteUser,
+    api: deletePermission,
     name: 'name'
   },
   columns: [
