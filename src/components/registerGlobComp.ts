@@ -1,5 +1,5 @@
 import type { App } from 'vue'
-import { SvgIcon, Icon } from './Icon/index'
+
 import { useGlobalState } from '@/utils/storage'
 import {
   MenuFoldOutlined,
@@ -7,12 +7,13 @@ import {
   FullscreenExitOutlined,
   FullscreenOutlined,
   TranslationOutlined,
-  SearchOutlined
+  SearchOutlined,
+  GithubFilled,
+  WechatFilled,
+  AlipayCircleFilled,
+  GoogleCircleFilled,
+  TwitterCircleFilled
 } from '@ant-design/icons-vue'
-
-import { ChatLineRound, Setting, Dessert } from '@element-plus/icons-vue'
-
-export const elementComps = [ChatLineRound, Setting, Dessert]
 
 export const antComps = [
   MenuFoldOutlined,
@@ -20,12 +21,18 @@ export const antComps = [
   FullscreenExitOutlined,
   FullscreenOutlined,
   TranslationOutlined,
-  SearchOutlined
+  SearchOutlined,
+  GithubFilled,
+  WechatFilled,
+  AlipayCircleFilled,
+  GoogleCircleFilled,
+  TwitterCircleFilled
 ]
+import { ChatLineRound, Setting, Dessert, Coin } from '@element-plus/icons-vue'
+
+export const elementComps = [ChatLineRound, Setting, Dessert, Coin]
 
 export function registerGlobComp(app: App) {
-  app.use(SvgIcon).use(Icon)
-
   let nameList: string[] = []
 
   antComps.map(item => {

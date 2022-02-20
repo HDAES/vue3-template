@@ -14,7 +14,7 @@
         />
       </el-form-item>
       <el-form-item class="enter-x" prop="code">
-        <div class="flex">
+        <div class="flex flex-1 justify-between">
           <el-input
             v-model="formData.code"
             :placeholder="$t('sys.login.placeholderCode')"
@@ -23,16 +23,12 @@
         </div>
       </el-form-item>
       <el-form-item class="enter-x">
-        <el-button
-          type="primary"
-          size="small"
-          class="w-full"
-          @click="handleLogin"
-          >{{ $t('sys.login.signInFormTitle') }}</el-button
-        >
+        <el-button type="primary" class="w-full" @click="handleLogin">{{
+          $t('sys.login.signInFormTitle')
+        }}</el-button>
       </el-form-item>
       <el-form-item class="enter-x">
-        <el-button size="small" class="w-full" @click="handleBack">{{
+        <el-button class="w-full" @click="handleBack">{{
           $t('sys.login.backSignIn')
         }}</el-button>
       </el-form-item>
@@ -42,14 +38,12 @@
 
 <script lang="ts" setup>
 import LoginTitle from './LoginTitle.vue'
-import { computed, unref, reactive, ref } from 'vue'
 import {
   LoginStateEnum,
   useLoginState,
   useFormRules,
   useFormValid
 } from './useLogin'
-import { CountdownBtn } from '@/components/CountdownBtn'
 const { getLoginState, handleBack } = useLoginState()
 const getShow = computed(() => unref(getLoginState) === LoginStateEnum.MOBILE)
 

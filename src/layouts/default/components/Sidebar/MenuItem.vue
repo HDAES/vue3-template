@@ -4,9 +4,7 @@
     v-if="route?.children && route.children.length > 0"
   >
     <template #title>
-      <i class="pr-4">
-        <Icon name="Dessert" style="color: #f9f9f9" />
-      </i>
+      <Icon :name="route?.meta.icon" size="18" />
       <span>{{ route.meta.title }}</span>
     </template>
     <MenuItem
@@ -22,7 +20,7 @@
     :key-data="(havecChildren ? path : '') + '/' + route?.path"
     v-else
   >
-    <i :class="route?.meta.icon"></i>
+    <Icon :name="route?.meta.icon" size="18" />
     <template #title>
       {{ route?.meta.title }}
     </template>

@@ -40,8 +40,6 @@
 
 <script lang="ts" setup>
 import { useSetting } from '@/hooks/setting/index'
-import { ref } from 'vue'
-import DarkModeToggle from '@/components/DarkModeToggle/index.vue'
 const drawer = ref(false)
 const { collapse, changeCollapse, isBreadcrumb, changeIsBreadcrumb } =
   useSetting()

@@ -33,13 +33,17 @@
 
 <script lang="ts" setup>
 import { globalState } from '@/utils/storage'
-import { ref, defineEmits } from 'vue'
-
 const emit = defineEmits(['update:icon'])
+const props = defineProps({
+  icon: {
+    type: String,
+    default: ''
+  }
+})
 const visible = ref<boolean>(false)
 const { iconNames } = globalState()
 
-const iconName = ref<string>('')
+const iconName = ref<string>(props.icon)
 
 const handleSelect = (name: string): void => {
   iconName.value = name
@@ -47,5 +51,3 @@ const handleSelect = (name: string): void => {
   visible.value = false
 }
 </script>
-
-<style lang="scss" scoped></style>

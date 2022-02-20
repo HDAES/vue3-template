@@ -18,7 +18,6 @@
 
 <script lang="ts">
 import { getVerifyCode } from '@/api/sys'
-import { onMounted, ref, defineComponent } from 'vue'
 export default defineComponent({
   setup(props, { emit }) {
     const imageBase64 = ref('')

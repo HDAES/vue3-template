@@ -1,5 +1,4 @@
 import { useSettingStore } from '@/store/modules/setting'
-import { computed } from 'vue'
 
 export const useSetting = () => {
   const settingStore = useSettingStore()

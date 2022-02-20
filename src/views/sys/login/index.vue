@@ -49,8 +49,8 @@
 </template>
 
 <script lang="ts" setup>
-import DarkModeToggle from '@/components/DarkModeToggle/index.vue'
-import LanguageSelect from '@/components/LanguageSelect/index.vue'
+import DarkModeToggle from '@/components/DarkModeToggle/src/DarkModeToggle.vue'
+import LanguageSelect from '@/components/LanguageSelect/src/LanguageSelect.vue'
 import LoginForm from './LoginForm.vue'
 import LoginPhone from './LoginPhone.vue'
 import QrCodeForm from './QrCodeForm.vue'

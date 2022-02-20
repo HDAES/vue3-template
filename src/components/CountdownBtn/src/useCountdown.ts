@@ -1,5 +1,3 @@
-import { ref } from 'vue'
-
 const second = ref(59)
 const status = ref(false)
 const timer = ref()

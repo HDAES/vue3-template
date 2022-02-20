@@ -1,4 +1,3 @@
-import { ref, reactive, watchEffect } from 'vue'
 import { StorageSerializers, useStorage } from '@vueuse/core'
 
 import { ColumnProps } from '../types/Column'

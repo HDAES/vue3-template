@@ -87,16 +87,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  GithubFilled,
-  WechatFilled,
-  AlipayCircleFilled,
-  GoogleCircleFilled,
-  TwitterCircleFilled
-} from '@ant-design/icons-vue'
-import { computed, reactive, ref, unref } from 'vue'
 import LoginTitle from './LoginTitle.vue'
-import { InputCode } from '@/components/InputCode'
 import {
   LoginStateEnum,
   useFormRules,

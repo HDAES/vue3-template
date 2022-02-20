@@ -110,9 +110,6 @@
 
 <script lang="ts" setup>
 import { useTable } from '@/components/Table'
-import { SelectIcon } from '@/components/SelectIcon'
-import { SelectTree } from '@/components/SelectTree'
-import { reactive, ref, watch } from 'vue'
 import { FormInstance } from 'types/elemntPlus'
 import { postPermissionAdd, putPermission } from '@/api/auth'
 const { dialogConfig, refresh, data } = useTable()
@@ -148,6 +145,7 @@ watch(
   () => {
     const row = dialogConfig.row
     if (row) {
+      console.log(row.icon)
       formData.value = {
         name: row.name,
         path: row.path,

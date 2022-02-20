@@ -1,4 +1,3 @@
-import { ref } from 'vue'
 const selectList = ref([])
 
 export function useSelect() {

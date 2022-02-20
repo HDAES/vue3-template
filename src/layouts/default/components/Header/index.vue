@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts" setup>
-import LanguageSelect from '@/components/LanguageSelect/index.vue'
 import FullScreen from './FullScreen.vue'
 import Notion from './Notion.vue'
 import Search from './Search.vue'

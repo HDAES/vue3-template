@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { onUnmounted } from 'vue'
 import { useCountdown } from './useCountdown'
 const { status, second, getCode, clearCode } = useCountdown()
 

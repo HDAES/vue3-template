@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { PropType, ref, unref, onMounted, watchEffect } from 'vue'
+import type { PropType } from 'vue'
 import { toDataURL, toCanvas } from 'qrcode'
 export default {
   props: {
@@ -69,5 +69,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped></style>

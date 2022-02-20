@@ -11,7 +11,6 @@
 </template>
 
 <script lang="ts">
-import { onUnmounted, defineComponent, ref } from 'vue'
 import { useStrengthPassword } from './useStrengthPassword'
 export default defineComponent({
   props: ['value'],

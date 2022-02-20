@@ -85,7 +85,6 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
 import { useTable } from './hooks/useTable'
 import TableHeader from './components/TableHeader.vue'
 import { useSelect } from './hooks/useSelect'
