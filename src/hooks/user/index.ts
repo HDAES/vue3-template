@@ -8,6 +8,9 @@ export function userHooks() {
     (): string => userStore.getNickName
   )
 
+  const hasRoles: ComputedRef<string[]> = computed(
+    (): string[] => userStore.getHasRole
+  )
   const roles: ComputedRef<string[]> = computed(
     (): string[] => userStore.getroles
   )
@@ -20,6 +23,7 @@ export function userHooks() {
     nickName,
     loginOut,
     getInfo,
+    hasRoles,
     clearLockInfo
   }
 }

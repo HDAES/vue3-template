@@ -1,3 +1,5 @@
+import { HasRole } from 'types/store'
+
 export interface LoginData {
   username: string
   password: string
@@ -9,5 +11,5 @@ export interface LoginData {
 export interface InfoData {
   roles: string[]
   nickname: string
-  authorities: Object[]
+  authorities: HasRole[]
 }

@@ -3,6 +3,7 @@ export interface UserState {
   realName: string
   nickName: string
   roles: string[]
+  hasRoles: string[]
 }
 
 export interface MetaState {
@@ -21,4 +22,8 @@ export interface LockInfo {
   pwd?: string | undefined
   // Is it locked?
   isLock?: boolean
+}
+
+export interface HasRole {
+  authority: string
 }

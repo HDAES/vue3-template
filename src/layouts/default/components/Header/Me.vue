@@ -12,13 +12,13 @@
             <span class="s"> {{ $t('layout.header.gitHub') }}</span>
           </div>
         </el-dropdown-item>
-        <el-dropdown-item :divided="true" command="lock">
+        <el-dropdown-item command="lock">
           <div class="dropdown-item">
             <LockOutlined />
             <span class="s"> {{ $t('layout.header.lockScreen') }}</span>
           </div>
         </el-dropdown-item>
-        <el-dropdown-item :divided="true" command="loginOut">
+        <el-dropdown-item command="loginOut">
           <div class="dropdown-item">
             <PoweroffOutlined />
             <span class="s"> {{ $t('layout.header.exitSystem') }}</span>

@@ -79,6 +79,8 @@ const handleCellClick = ref<(arg0: any) => void>(() => {})
 
 const resetColumns = ref<() => void>(() => {})
 
+const updateColumns = ref<() => void>(() => {})
+
 /**
  * 刷新表格
  */
@@ -101,6 +103,7 @@ export function useTable() {
     refresh,
     handleUpDate,
     resetColumns,
+    updateColumns,
     handleDelete,
     handleCellClick
   }
@@ -111,6 +114,7 @@ export function useTable() {
  * @param tableProps
  */
 export function registerTable<T>(tableProps: Props): void {
+  data.value = []
   //表格名字
   title.value = tableProps.title || '默认名字'
 
@@ -165,31 +169,41 @@ export function registerTable<T>(tableProps: Props): void {
  * @returns
  */
 export function useColums(tableProps: Props) {
-  const columnsStorage = useStorage(
+  const columnsStorage = useStorage<string[]>(
     'vueuse-local-' + tableProps.apiList.name,
-    null,
-    undefined,
-    {
-      serializer: StorageSerializers.object
-    }
+    []
   )
 
   let tempColumns: ColumnProps[] = []
+  let columnsShowKey: string[] = []
+
+  let isBool = columnsStorage.value.length == 0
   tableProps.columns.forEach((item: ColumnProps) => {
-    item.show = true
-    tempColumns.push(item)
+    if (isBool) {
+      item.show = true
+      tempColumns.push(item)
+      columnsShowKey.push(item.label)
+    } else {
+      item.show = columnsStorage.value.includes(item.label)
+      tempColumns.push(item)
+    }
   })
 
-  if (!columnsStorage.value) {
-    columnsStorage.value = tempColumns
-    columns.value = tempColumns
-  } else {
-    columns.value = columnsStorage.value
-  }
+  if (isBool) columnsStorage.value = columnsShowKey
+
+  columns.value = tempColumns
 
   resetColumns.value = () => {
-    columnsStorage.value = tempColumns
-    columns.value = tempColumns
+    columnsStorage.value = []
+    columns.value = tableProps.columns
+  }
+
+  updateColumns.value = () => {
+    let columnsShowKey: string[] = []
+    columns.value.forEach(item => {
+      if (item.show == true) columnsShowKey.push(item.label)
+    })
+    columnsStorage.value = columnsShowKey
   }
 }
 

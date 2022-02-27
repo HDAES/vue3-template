@@ -94,6 +94,7 @@ export default defineComponent({
       flipUp,
       textClass,
       setFront,
+      _textStyle,
       setBack,
       flipType,
       isFlipping,

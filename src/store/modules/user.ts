@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { UserState } from 'types/store'
+import { HasRole, UserState } from 'types/store'
 import { setToken, getToken, clearToken } from '@/utils/storage'
 import { encryptByMd5 } from '@/utils/crypto'
 import { postLogin, getInfo, postLoginOut } from '@/api/sys'
@@ -11,7 +11,8 @@ export const useUserStore = defineStore({
     token: getToken(),
     realName: '',
     nickName: '',
-    roles: []
+    roles: [],
+    hasRoles: []
   }),
   getters: {
     getNickName(): string {
@@ -19,6 +20,9 @@ export const useUserStore = defineStore({
     },
     getroles(): string[] {
       return this.roles
+    },
+    getHasRole(): string[] {
+      return this.hasRoles
     }
   },
   actions: {
@@ -30,6 +34,13 @@ export const useUserStore = defineStore({
     },
     setNickName(nickname: string): void {
       this.nickName = nickname
+    },
+    setHasRoles(hasRole: HasRole[]): void {
+      let list: any[] = []
+      hasRole.forEach(item => {
+        list.push(Object.values(item)[0])
+      })
+      this.hasRoles = list
     },
     async login(loginData: LoginData) {
       try {
@@ -46,7 +57,8 @@ export const useUserStore = defineStore({
     },
     async info() {
       try {
-        const { roles, nickname } = await getInfo()
+        const { roles, nickname, authorities } = await getInfo()
+        this.setHasRoles(authorities)
         this.setRoles(roles)
         this.setNickName(nickname)
         return true

@@ -18,7 +18,7 @@
             <el-icon :size="20" style="margin-right: 15px">
               <Rank />
             </el-icon>
-            <el-checkbox v-model="element.show">{{
+            <el-checkbox v-model="element.show" @change="updateColumns">{{
               element.label
             }}</el-checkbox>
           </div>
@@ -36,7 +36,7 @@
 import draggable from 'vuedraggable'
 import { Menu, Rank, RefreshRight } from '@element-plus/icons-vue'
 import { useTable, useColums } from '../hooks/useTable'
-const { tableConfig, columns, resetColumns } = useTable()
+const { tableConfig, columns, resetColumns, updateColumns } = useTable()
 
 const handleDraggable = e => {
   console.log(e)

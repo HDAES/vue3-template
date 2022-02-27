@@ -167,8 +167,10 @@ const handleDetermine = (formEl: FormInstance | undefined) => {
   formEl.validate(async valid => {
     if (valid) {
       if (dialogConfig.type == 'add') {
-        formData.value.parentId = '0'
-        formData.value.component = 'Layout'
+        if (formData.value.type == 0) {
+          formData.value.parentId = '0'
+          formData.value.component = 'Layout'
+        }
         await postPermissionAdd(formData.value)
       } else {
         await putPermission(formData.value)

@@ -37,7 +37,8 @@ import {
   Coin,
   Platform,
   KnifeFork,
-  DocumentCopy
+  DocumentCopy,
+  Monitor
 } from '@element-plus/icons-vue'
 
 export const elementComps = [
@@ -47,7 +48,8 @@ export const elementComps = [
   Coin,
   Platform,
   KnifeFork,
-  DocumentCopy
+  DocumentCopy,
+  Monitor
 ]
 
 export function registerGlobComp(app: App) {

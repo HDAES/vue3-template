@@ -1,16 +1,16 @@
 <template>
   <div>
     <BasicTable>
-      <!-- <template #status="scope">
+      <template #status="scope">
         <el-switch
           v-model="scope.row.status"
           :active-value="1"
           :inactive-value="0"
           active-color="#13ce66"
           inactive-color="#ff4949"
-          @change="switchChange(scope.row)"
+          @change="switchSatatusChange(scope.row)"
         />
-      </template> -->
+      </template>
 
       <template #operate="scope">
         <el-button type="text" @click="handleChangePSW(scope.row)"
@@ -26,7 +26,7 @@
 <script lang="ts" setup name="auth-user">
 import { BasicTable, registerTable } from '@/components/Table'
 import Dialog from './Dialog.vue'
-import { getUser, deleteUser, putUser } from '@/api/auth/index'
+import { getUser, deleteUser, putUser, putUserStatus } from '@/api/auth/index'
 import { encryptByMd5 } from '@/utils/crypto'
 import { ElMessageBox } from 'element-plus'
 
@@ -77,11 +77,10 @@ registerTable({
   ]
 })
 
-const switchChange = (e: { id: null; status: any }) => {
-  console.log(e)
-  // if (e.id != null) {
-  //   putUserStatus({ secUserId: e.id, status: e.status })
-  // }
+const switchSatatusChange = (e: { id: null; status: any }) => {
+  if (e.id != null) {
+    putUserStatus({ secUserId: e.id, status: e.status })
+  }
 }
 
 //修改密码

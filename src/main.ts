@@ -13,7 +13,7 @@ import { setupI18n } from '@/locales/setupI18n'
 import { useGlobalState } from '@/utils/storage'
 import { setupStore } from '@/store'
 import { registerGlobComp } from '@/components/registerGlobComp'
-
+import { setupHasRole } from '@/utils/hasPermission'
 import '@/permission'
 
 async function bootstrap() {
@@ -28,6 +28,8 @@ async function bootstrap() {
   useGlobalState()
 
   setupStore(app)
+
+  setupHasRole(app)
 
   app.mount('#app')
 }

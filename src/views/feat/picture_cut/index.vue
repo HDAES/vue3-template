@@ -38,6 +38,7 @@ export default defineComponent({
           initMenu: 'filter', // 默认打开的菜单项
           menuBarPosition: 'right', // 菜单所在的位置
           locale: locale_zh, //本地化语言为中文
+
           theme: customTheme // 自定义样式
         },
         cssMaxWidth: 1000, // canvas 最大宽度

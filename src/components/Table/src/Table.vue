@@ -1,7 +1,6 @@
 <template>
   <div ref="BasicTable" class="basic-table bg-white dark:bg-dark-800">
     <TableHeader />
-
     <el-row :gutter="24">
       <el-col :span="haveSlot ? 18 : 24">
         <el-card :header="title" shadow="never">
@@ -105,7 +104,6 @@ const {
   tableRef,
   handleUpDate
 } = useTable()
-
 const { handleSelectionChange, handleSelect } = useSelect()
 
 const _init = () => {}

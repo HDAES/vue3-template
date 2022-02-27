@@ -56,3 +56,21 @@ export function postLoginOut() {
     method: 'POST'
   })
 }
+
+//在线用户列表:
+export function getOnline(params) {
+  return request({
+    url: '/admin/sec/monitor/online/user',
+    method: 'get',
+    params
+  })
+}
+
+//批量踢出在线用户
+export function deleteKickout(params) {
+  return request({
+    url: '/admin/sec/monitor/online/user/kickout',
+    method: 'DELETE',
+    params
+  })
+}
