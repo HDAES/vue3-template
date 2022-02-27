@@ -12,7 +12,8 @@ import {
   WechatFilled,
   AlipayCircleFilled,
   GoogleCircleFilled,
-  TwitterCircleFilled
+  TwitterCircleFilled,
+  DashboardOutlined
 } from '@ant-design/icons-vue'
 
 export const antComps = [
@@ -26,11 +27,28 @@ export const antComps = [
   WechatFilled,
   AlipayCircleFilled,
   GoogleCircleFilled,
-  TwitterCircleFilled
+  TwitterCircleFilled,
+  DashboardOutlined
 ]
-import { ChatLineRound, Setting, Dessert, Coin } from '@element-plus/icons-vue'
+import {
+  ChatLineRound,
+  Setting,
+  Dessert,
+  Coin,
+  Platform,
+  KnifeFork,
+  DocumentCopy
+} from '@element-plus/icons-vue'
 
-export const elementComps = [ChatLineRound, Setting, Dessert, Coin]
+export const elementComps = [
+  ChatLineRound,
+  Setting,
+  Dessert,
+  Coin,
+  Platform,
+  KnifeFork,
+  DocumentCopy
+]
 
 export function registerGlobComp(app: App) {
   let nameList: string[] = []

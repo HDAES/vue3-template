@@ -5,7 +5,7 @@
   >
     <template #title>
       <Icon :name="route?.meta.icon" size="18" />
-      <span>{{ route.meta.title }}</span>
+      <span style="margin-left: 5px">{{ route.meta.title }}</span>
     </template>
     <MenuItem
       v-for="(item, index) in route.children"
