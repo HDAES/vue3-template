@@ -2,7 +2,7 @@
   <div class="h-full flex items-center justify-between">
     <el-space :size="20">
       <Collapse />
-      <Breadcrumb />
+      <!-- <Breadcrumb /> -->
     </el-space>
     <el-space :size="20">
       <Search />

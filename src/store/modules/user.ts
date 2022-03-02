@@ -71,7 +71,6 @@ export const useUserStore = defineStore({
         postLoginOut()
           .then(res => {
             clearToken()
-            this.token = ''
             resolve(true)
           })
           .catch(error => {

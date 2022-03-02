@@ -109,8 +109,8 @@ const inputCode = ref()
 const { validForm } = useFormValid(formRef)
 
 const formData = reactive<LoginData>({
-  username: '',
-  password: '',
+  username: 'test',
+  password: '123456',
   code: '',
   verify: '',
   rememberMe: false

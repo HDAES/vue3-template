@@ -66,6 +66,7 @@
 </template>
 
 <script lang="ts" setup>
+import { router } from '@/router'
 import {
   GithubOutlined,
   LockOutlined,
@@ -80,6 +81,7 @@ import { encryptByMd5 } from '@/utils/crypto'
 type FormData = {
   lockPassWord: string
 }
+const { nickName, loginOut } = userHooks()
 
 const { setLockInfo } = useLockStore()
 const formRef = ref<FormInstance>()
@@ -97,14 +99,14 @@ const rules = markRaw({
     }
   ]
 })
-const { nickName, loginOut } = userHooks()
+
 const handleCommand = (command: string) => {
   if (command == 'lock') {
     formData.lockPassWord = ''
     visible.value = true
   } else if (command == 'loginOut') {
     loginOut().then(res => {
-      location.href = '/login'
+      router.push('/login')
     })
   }
 }
