@@ -15,7 +15,6 @@
   --el-text-color-primary: #f3f4f6;
   --el-text-color-regular: #f9f9f9;
   --el-text-color-secondary: #f9f9f999;
-  --el-color-white: #181818;
   --el-bg-color: #2e2f34;
   --el-border-color-light: #2d2d2d;
   --el-border-color-lighter: #2d2d2d;
@@ -68,7 +67,24 @@
   .el-pagination.is-background .el-pager li {
     background-color: var(--el-color-white);
   }
+
+  // loading 遮罩层
+  .el-loading-mask{
+    background-color: var(--el-color-white);
+  }
+
+
+  //
+  .el-button--danger{
+    background-color: var(--el-color-white);
+  }
+  .el-button--danger:hover{
+    background-color: var(--el-color-white);
+    color: var(--el-color-danger)!important;
+  }
 }
+
+
 .el-card,
 .el-button {
   transition: none;
@@ -89,4 +105,9 @@
   .btn-next .icon {
     display: inline-block;
   }
+}
+
+
+button:focus {
+  outline: none
 }

@@ -95,7 +95,7 @@ const rules = markRaw({
     {
       required: true,
       message: t('layout.header.lockPasswordPlaceholder'),
-      trigger: 'blur'
+      trigger: 'change'
     }
   ]
 })

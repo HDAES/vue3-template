@@ -7,8 +7,6 @@ declare module 'vue' {
     ColumnSetting: typeof import('./../src/components/Table/src/components/ColumnSetting.vue')['default']
     CountdownBtn: typeof import('./../src/components/CountdownBtn/src/CountdownBtn.vue')['default']
     DarkModeToggle: typeof import('./../src/components/DarkModeToggle/src/DarkModeToggle.vue')['default']
-    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
-    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
     ElCard: typeof import('element-plus/es')['ElCard']

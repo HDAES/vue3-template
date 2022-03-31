@@ -43,9 +43,13 @@
       </el-form-item>
 
       <el-form-item class="enter-x">
-        <el-button type="primary" class="w-full" @click="handleLogin">{{
-          $t('sys.login.signInFormTitle')
-        }}</el-button>
+        <el-button
+          :loading="loading"
+          type="primary"
+          class="w-full"
+          @click="handleLogin"
+          >{{ $t('sys.login.signInFormTitle') }}</el-button
+        >
       </el-form-item>
       <el-row :gutter="12">
         <el-col :md="8" :xs="24">
@@ -106,6 +110,8 @@ const { getFormRules } = useFormRules()
 const formRef = ref()
 const inputCode = ref()
 
+// 登录状态
+const loading = ref(false)
 const { validForm } = useFormValid(formRef)
 
 const formData = reactive<LoginData>({
@@ -123,7 +129,7 @@ const router = useRouter()
 async function handleLogin() {
   const data = await validForm()
   if (!data) return
-
+  loading.value = true
   userStore
     .login(formData)
     .then(res => {
@@ -131,6 +137,7 @@ async function handleLogin() {
     })
     .catch(e => {
       inputCode.value.handleRefresh()
+      loading.value = false
     })
 }
 </script>

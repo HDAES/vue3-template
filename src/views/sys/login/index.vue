@@ -8,7 +8,7 @@
       <div class="flex h-full">
         <div class="hidden min-h-full pl-4 mr-4 xl:flex xl:flex-col xl:w-6/12">
           <div class="logo -enter-x">
-            <div class="text-light-50 text-4xl">admin</div>
+            <!-- <div class="text-light-50 text-4xl">admin</div> -->
           </div>
           <div class="mt-auto mb-auto">
             <img

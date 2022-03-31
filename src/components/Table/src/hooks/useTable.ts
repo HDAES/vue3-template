@@ -4,7 +4,7 @@ import { ColumnProps } from '../types/Column'
 import { Pagination } from '../types/Pagination'
 import { Props } from '../types/Props'
 import { TableConfig } from '../types/TableConfig'
-import { ElMessageBox } from 'element-plus'
+import { ElMessageBox, ElMessage } from 'element-plus'
 import { useSelect } from './useSelect'
 import { TableInstance } from 'types/elemntPlus'
 
@@ -195,7 +195,13 @@ export function useColums(tableProps: Props) {
 
   resetColumns.value = () => {
     columnsStorage.value = []
-    columns.value = tableProps.columns
+    columns.value.forEach(item => {
+      item.show = true
+    })
+    ElMessage({
+      message: '重置成功',
+      type: 'success'
+    })
   }
 
   updateColumns.value = () => {
