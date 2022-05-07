@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { getPermissionTree, putRolePermission } from '@/api/auth'
-import { TreeInstance } from 'types/elemntPlus'
+import type { TreeInstance } from 'types/elemntPlus'
 import { useTable } from '@/components/Table'
 import { userHooks } from '@/hooks/user'
 const { refresh } = useTable()

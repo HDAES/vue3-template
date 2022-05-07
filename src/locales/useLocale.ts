@@ -1,4 +1,4 @@
-import { LocaleType } from 'types/config'
+import type { LocaleType } from 'types/config'
 import { unref } from 'vue'
 import { i18n } from './setupI18n'
 

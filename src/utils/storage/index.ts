@@ -7,7 +7,7 @@ import {
 } from '@vueuse/core'
 import config from '@/config/config'
 
-import { LockInfo } from 'types/store'
+import type { LockInfo } from 'types/store'
 
 export interface GlobalState {
   language: RemovableRef<string>

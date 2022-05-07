@@ -1,4 +1,4 @@
-import { LocaleType } from 'types/config'
+import type { LocaleType } from 'types/config'
 
 export default {
   // 语言

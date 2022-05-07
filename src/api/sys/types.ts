@@ -1,4 +1,4 @@
-import { HasRole } from 'types/store'
+import type { HasRole } from 'types/store'
 
 export interface LoginData {
   username: string

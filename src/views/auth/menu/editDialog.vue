@@ -110,7 +110,7 @@
 
 <script lang="ts" setup>
 import { useTable } from '@/components/Table'
-import { FormInstance } from 'types/elemntPlus'
+import type { FormInstance } from 'types/elemntPlus'
 import { postPermissionAdd, putPermission } from '@/api/auth'
 const { dialogConfig, refresh, data } = useTable()
 

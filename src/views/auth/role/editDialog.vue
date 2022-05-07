@@ -27,7 +27,7 @@
 <script lang="ts" setup>
 import { postAddRole, putRole } from '@/api/auth'
 import { useTable } from '@/components/Table'
-import { FormInstance } from 'types/elemntPlus'
+import type { FormInstance } from 'types/elemntPlus'
 import { reactive, ref, watch } from 'vue'
 const { dialogConfig, refresh } = useTable()
 

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { getPermissionTree } from '@/api/sys/index'
 import Layout from '@/layouts/default/index.vue'
-import { SidebarItem } from 'types/store'
+import type { SidebarItem } from 'types/store'
 const modules = import.meta.glob('../../views/**/index.vue')
 
 interface PermissionState {

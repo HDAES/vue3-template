@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { SidebarItem } from 'types/store'
+import type { SidebarItem } from 'types/store'
 interface MenuItemState {
   route: Object
   path: string

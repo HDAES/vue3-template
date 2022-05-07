@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 import { useLockInfoStorage } from '@/utils/storage/index'
-import { LockInfo } from 'types/store'
+import type { LockInfo } from 'types/store'
 
 const { getLockInfo, setLockInfo, clearLockInfo } = useLockInfoStorage()
 interface LockState {

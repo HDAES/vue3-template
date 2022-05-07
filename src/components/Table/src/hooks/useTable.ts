@@ -6,7 +6,7 @@ import { Props } from '../types/Props'
 import { TableConfig } from '../types/TableConfig'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import { useSelect } from './useSelect'
-import { TableInstance } from 'types/elemntPlus'
+import type { TableInstance } from 'types/elemntPlus'
 
 interface DialogConfigType {
   visible: boolean

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { HasRole, UserState } from 'types/store'
+import type { HasRole, UserState } from 'types/store'
 import { setToken, getToken, clearToken } from '@/utils/storage'
 import { encryptByMd5 } from '@/utils/crypto'
 import { postLogin, getInfo, postLoginOut } from '@/api/sys'

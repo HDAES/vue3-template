@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios'
 import { ElMessage, ElLoading } from 'element-plus'
-import { ResponseList } from 'types/axios'
+import type { ResponseList } from 'types/axios'
 import { addPending, removePending } from './pending'
 import { clearToken } from '@/utils/storage'
 import { setRequestConfig } from './sign'

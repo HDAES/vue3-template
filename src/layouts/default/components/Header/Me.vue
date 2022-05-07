@@ -75,9 +75,10 @@ import {
 
 import { userHooks } from '@/hooks/user/index'
 import { t } from '@/hooks/web/useI18n'
-import { FormInstance } from 'types/elemntPlus'
 import { useLockStore } from '@/store/modules/lock'
 import { encryptByMd5 } from '@/utils/crypto'
+import type { FormInstance } from 'types/elemntPlus'
+
 type FormData = {
   lockPassWord: string
 }
